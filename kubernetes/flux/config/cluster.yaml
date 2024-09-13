@@ -7,11 +7,6 @@ metadata:
 spec:
   interval: 30m
   url: "https://github.com/BlauerFasan/dev-home-ops.git"
-<<<<<<< HEAD
-  secretRef:
-    name: github-deploy-key
-=======
->>>>>>> 8e1fbe2 (Initial commit :rocket:)
   ref:
     branch: "main"
   ignore: |
