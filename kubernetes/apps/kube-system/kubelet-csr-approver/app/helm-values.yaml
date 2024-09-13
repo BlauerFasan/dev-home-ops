@@ -1,0 +1,3 @@
+---
+providerRegex: ^(chrb-vmd-ms1|chrb-vmd-ms2|chrb-vmd-ms3)$
+bypassDnsResolution: true
