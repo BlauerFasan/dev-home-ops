@@ -28,7 +28,11 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
+<<<<<<< HEAD
           hardwareAddr: "52:23:da:ea:6f:b6"
+=======
+          hardwareAddr: "06:9d:65:76:f8:a9"
+>>>>>>> 8e1fbe2 (Initial commit :rocket:)
         dhcp: false
         addresses:
           - "172.30.100.31/26"
@@ -45,7 +49,11 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
+<<<<<<< HEAD
           hardwareAddr: "02:a8:7c:c1:19:be"
+=======
+          hardwareAddr: "3e:c2:68:5f:6d:c2"
+>>>>>>> 8e1fbe2 (Initial commit :rocket:)
         dhcp: false
         addresses:
           - "172.30.100.32/26"
@@ -62,7 +70,11 @@ nodes:
     controlPlane: true
     networkInterfaces:
       - deviceSelector:
+<<<<<<< HEAD
           hardwareAddr: "ae:e2:ca:31:27:b5"
+=======
+          hardwareAddr: "32:9c:f3:f9:3f:86"
+>>>>>>> 8e1fbe2 (Initial commit :rocket:)
         dhcp: false
         addresses:
           - "172.30.100.33/26"
