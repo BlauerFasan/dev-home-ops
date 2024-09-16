@@ -23,6 +23,7 @@ spec:
     remediation:
       retries: 5
   upgrade:
+    crds: CreateReplace
     remediation:
       retries: 5
 
@@ -103,7 +104,8 @@ spec:
 
     ports:
       traefik:
-        expose: true
+        expose:
+          default: true
       web:
         redirectTo:
           port: websecure
@@ -123,7 +125,8 @@ spec:
 
       metrics:
         port: 8082
-        expose: true
+        expose:
+          default: true
         exposedPort: 8082
 
     tlsOptions:
