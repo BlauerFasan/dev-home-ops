@@ -6,7 +6,7 @@ metadata:
   name: &app whoami
   namespace: flux-system
 spec:
-  targetNamespace: volsync
+  targetNamespace: networking
   path: ./kubernetes/apps/networking/whoami/app
   commonMetadata:
     labels:
