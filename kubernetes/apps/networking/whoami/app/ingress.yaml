@@ -1,0 +1,35 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: whoami
+  annotations:
+    external-dns/is-public: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    hajimari.io/enable: "false"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    # traefik.ingress.kubernetes.io/router.middlewares: "traefik-chain-internal-secure-forwardauth@kubernetescrd"
+spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - "whoami.${SECRET_DOMAIN}"
+      secretName: "whoami.${SECRET_DOMAIN//./-}-prod-tls"
+  rules:
+    - host: whoami.${SECRET_DOMAIN}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: whoami
+                port:
+                  number: 80
+          # - path: /outpost.goauthentik.io/
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #       name: authentik-authentik
+          #       port:
+          #         number: 9000
