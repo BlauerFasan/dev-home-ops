@@ -3,11 +3,14 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: traefik
+  name: &app traefik
   namespace: flux-system
 spec:
   targetNamespace: networking
   path: ./kubernetes/apps/networking/traefik/app
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -22,7 +25,7 @@ spec:
   wait: true
   interval: 30m
   retryInterval: 2m
-  timeout: 3m
+  timeout: 5m
 ---
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
