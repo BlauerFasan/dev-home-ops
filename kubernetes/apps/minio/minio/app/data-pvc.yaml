@@ -13,7 +13,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${RACKNAS_ADDR}"
-    path: /volume1/minio/development
+    path: /volume1/dev/minio/
   mountOptions:
     # - nfsvers=4.1
     - tcp
