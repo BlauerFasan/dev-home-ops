@@ -24,6 +24,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             service:
               name: app
               port: http
@@ -31,6 +32,7 @@ spec:
       http:
         paths:
           - path: /
+            pathType: Prefix
             service:
               name: app
               port: s3
