@@ -42,7 +42,7 @@ spec:
               tag: RELEASE.2024-09-13T20-26-02Z@sha256:cd04ea408e185cb50076ea1c3988d444119b19aaae15aab45387ccf14b2a2f86
 
             env:
-              TZ: ${TIMEZONE}
+              TZ: ${CLUSTER_TIMEZONE}
               MINIO_UPDATE: "off"
               MINIO_API_CORS_ALLOW_ORIGIN: "https://minio.${SECRET_DOMAIN},https://s3.${SECRET_DOMAIN}"
               MINIO_BROWSER_REDIRECT_URL: "https://minio.${SECRET_DOMAIN}"
