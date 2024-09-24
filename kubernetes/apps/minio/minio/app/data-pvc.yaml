@@ -12,7 +12,7 @@ spec:
   storageClassName: *pv
   persistentVolumeReclaimPolicy: Retain
   nfs:
-    server: "${RACKNAS_ADDR}"
+    server: "${LOCAL_LAN_NAS}"
     path: /volume1/dev/minio/
   mountOptions:
     # - nfsvers=4.1
