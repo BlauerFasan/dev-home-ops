@@ -28,7 +28,7 @@ spec:
             backend:
               service:
                 name: minio
-                port: http
+                port: 9001
     - host: s3.${SECRET_DOMAIN}
       http:
         paths:
@@ -37,4 +37,4 @@ spec:
             backend:
               service:
                 name: minio
-                port: s3
+                port: 9000
