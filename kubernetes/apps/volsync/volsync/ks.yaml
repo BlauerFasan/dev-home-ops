@@ -14,6 +14,9 @@ spec:
   sourceRef:
     kind: GitRepository
     name: home-ops-kubernetes
+  dependsOn:
+    - name: snapshot-controller
+    - name: minio
   prune: true
   wait: false
   interval: 30m
