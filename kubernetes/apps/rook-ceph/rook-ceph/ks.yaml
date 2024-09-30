@@ -36,7 +36,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/main/apps/rook-ceph/rook-ceph/cluster
+  path: ./kubernetes/apps/rook-ceph/rook-ceph/cluster
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
