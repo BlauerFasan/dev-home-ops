@@ -26,6 +26,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: rook-ceph-cluster
+                name: rook-ceph-mgr-dashboard
                 port:
-                  number: 8443
+                  number: 7000

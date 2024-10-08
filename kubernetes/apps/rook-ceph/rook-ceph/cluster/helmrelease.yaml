@@ -47,6 +47,7 @@ spec:
       dashboard:
         enabled: true
         urlPrefix: /
+        port: 7000
         ssl: false
         prometheusEndpoint: http://prometheus-operated.observability.svc.cluster.local:9090
       mgr: #???
@@ -59,15 +60,15 @@ spec:
         config:
           osdsPerDevice: "1"
         nodes:
-          - name: chrb-vmd-nd1
+          - name: "chrb-vmd-nd1"
             devices:
-              - name: vdb
-          - name: chrb-vmd-nd2
+              - name: "/dev/vdb"
+          - name: "chrb-vmd-nd2"
             devices:
-              - name: vdb
-          - name: chrb-vmd-nd3
+              - name: "/dev/vdb"
+          - name: "chrb-vmd-nd3"
             devices:
-              - name: vdb
+              - name: "/dev/vdb"
       resources:
         mgr:
           requests:
@@ -131,7 +132,7 @@ spec:
             size: 3
         storageClass:
           enabled: true
-          name: rook-ceph-block
+          name: ceph-block
           isDefault: true
           reclaimPolicy: Delete
           allowVolumeExpansion: true
@@ -153,7 +154,7 @@ spec:
       isDefault: false
       deletionPolicy: Delete
     cephFileSystems:
-      - name: &cephFileSystemName rook-ceph-filesystem
+      - name: &cephFileSystemName ceph-filesystem
         spec:
           metadataPool:
             replicated:
@@ -185,7 +186,7 @@ spec:
         storageClass:
           enabled: true
           isDefault: false
-          name: rook-ceph-filesystem
+          name: ceph-filesystem
           pool: data0
           reclaimPolicy: Delete
           allowVolumeExpansion: true
