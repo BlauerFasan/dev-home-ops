@@ -46,7 +46,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: https://s3.${SECRET_DOMAIN}
-      serverName: postgres-v3
+      serverName: postgres-v4
       s3Credentials:
         accessKeyId:
           name: postgres-minio-secret
@@ -57,7 +57,7 @@ spec:
 
   bootstrap:
     recovery:
-      source: &previous-cluster postgres-v2
+      source: &previous-cluster postgres-v3
   externalClusters:
     - name: *previous-cluster
       barmanObjectStore:
@@ -66,7 +66,7 @@ spec:
           maxParallel: 8
         destinationPath: s3://postgresql/
         endpointURL: https://s3.${SECRET_DOMAIN}
-        serverName: postgres-v2
+        serverName: postgres-v3
         s3Credentials:
           accessKeyId:
             name: postgres-minio-secret
