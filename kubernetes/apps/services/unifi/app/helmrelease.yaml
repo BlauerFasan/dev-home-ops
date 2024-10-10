@@ -74,6 +74,7 @@ spec:
           coredns.io/hostname: unifi
           io.cilium/lb-ipam-ips: "${LB_UNIFI_ADDR}"
           traefik.ingress.kubernetes.io/service.serversscheme: "https"
+        loadBalancerIP: "${LB_UNIFI_ADDR}"
         externalTrafficPolicy: Cluster
         ports:
           # -- Configure Web interface + API port
