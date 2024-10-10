@@ -1,16 +1,4 @@
 ---
-# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/external-secrets.io/externalsecret_v1beta1.json
-apiVersion: v1
-kind: Secret
-metadata:
-  name: "${APP}-volsync-secret"
-type: Opaque
-stingData:
-    RESTIC_REPOSITORY: s3:http://minio.minio.svc.cluster.local:9000/volsync/${APP}
-    RESTIC_PASSWORD: "${RESTIC_PASSWORD}"
-    AWS_ACCESS_KEY_ID: "${VOLSYNC_ACCESS_KEY_ID}"
-    AWS_SECRET_ACCESS_KEY: "${VOLSYNC_ACCESS_KEY_SECRET}"
----
 # yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/volsync.backube/replicationsource_v1alpha1.json
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
