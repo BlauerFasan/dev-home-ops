@@ -28,6 +28,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: unifi
+                name: app
                 port:
                   number: 8443
