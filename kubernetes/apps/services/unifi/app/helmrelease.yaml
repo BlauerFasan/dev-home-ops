@@ -67,7 +67,7 @@ spec:
                 memory: "2Gi"
 
     service:
-      main:
+      app:
         controller: *app
         type: LoadBalancer
         annotations:
