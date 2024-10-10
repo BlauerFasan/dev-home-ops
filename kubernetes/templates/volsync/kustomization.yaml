@@ -5,4 +5,4 @@ kind: Kustomization
 resources:
   - ./claim.yaml
   - ./minio.yaml
-  - ./secret.sops.yaml
+  - ./secrets.sops.yaml
