@@ -10,6 +10,7 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/observability/prometheus-operator-crds/app
+  dependsOn: []
   prune: false # never should be deleted
   sourceRef:
     kind: GitRepository

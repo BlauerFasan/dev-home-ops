@@ -7,10 +7,10 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: kube-system
-  path: ./kubernetes/apps/kube-system/snapshot-controller/app
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/kube-system/snapshot-controller/app
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

@@ -10,15 +10,15 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/services/unifi/app
   dependsOn:
     - name: rook-ceph-cluster
     - name: volsync
     - name: traefik
-  path: ./kubernetes/apps/services/unifi/app
-  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  prune: true
   wait: false
   interval: 30m
   retryInterval: 1m

@@ -10,10 +10,10 @@ spec:
     labels:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/flux-system/webhooks/app
-  prune: true
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
+  prune: true
   wait: true
   interval: 30m
   retryInterval: 1m

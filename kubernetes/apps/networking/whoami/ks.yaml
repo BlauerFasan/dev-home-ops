@@ -7,15 +7,15 @@ metadata:
   namespace: flux-system
 spec:
   targetNamespace: networking
-  path: ./kubernetes/apps/networking/whoami/app
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/networking/whoami/app
+  dependsOn:
+    - name: traefik
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  dependsOn:
-    - name: traefik
   prune: true
   wait: true
   interval: 30m
