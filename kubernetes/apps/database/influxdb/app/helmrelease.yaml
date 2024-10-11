@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.5.0
+      version: 3.5.1
       sourceRef:
         kind: HelmRepository
         name: bjw-s
@@ -39,14 +39,14 @@ spec:
           app:
             image:
               repository: docker.io/library/influxdb
-              tag: 2.7-alpine
+              tag: 2.7.10-alpine
 
             resources:
               requests:
                 cpu: 100m
                 memory: 128M
               limits:
-                memory: 512M
+                memory: 384M
 
             probes:
               liveness: &health
