@@ -29,7 +29,7 @@ spec:
       max_connections: "600"
       max_slot_wal_keep_size: 20GB
       shared_buffers: 512MB
-      timezone: ${TIMEZONE}
+      timezone: ${CLUSTER_TIMEZONE}
 
   monitoring:
     enablePodMonitor: true
