@@ -6,7 +6,7 @@ metadata:
   name: postgres14
 spec:
   instances: 3 # set to the number of nodes in the cluster
-  imageName: ghcr.io/cloudnative-pg/postgresql:14.13
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.9
   primaryUpdateStrategy: unsupervised
 
   storage:
