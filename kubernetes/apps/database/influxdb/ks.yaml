@@ -12,6 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/database/influxdb/app
   dependsOn:
+    - name: rook-ceph-cluster
     - name: volsync
   sourceRef:
     kind: GitRepository
