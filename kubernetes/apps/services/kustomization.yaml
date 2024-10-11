@@ -8,5 +8,5 @@ resources:
   # Flux-Kustomizations
   # - ./mealie/ks.yaml
   - ./stirling-pdf/ks.yaml
-  - ./unifi/ks.yaml
+  # - ./unifi/ks.yaml
   # - ./vikunja/ks.yaml
