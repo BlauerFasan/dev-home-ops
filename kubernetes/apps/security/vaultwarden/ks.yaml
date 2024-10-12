@@ -3,33 +3,27 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app mealie
+  name: &app vaultwarden
   namespace: flux-system
-  labels:
-    substitution.flux.home.arpa/enabled: "true"
 spec:
-  targetNamespace: services
+  targetNamespace: security
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/services/mealie/app
+  path: './kubernetes/apps/security/vaultwarden/app/'
   dependsOn:
-    - name: cloudnative-pg-cluster
-    - name: authentik
+    - name: cloudnative-pg
     - name: rook-ceph-cluster
+    - name: traefik
     - name: smtp-relay
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
-  healthChecks:
-    - apiVersion: helm.toolkit.fluxcd.io/v2beta1
-      kind: HelmRelease
-      name: mealie
-      namespace: services
   prune: true
+  wait: false
   interval: 30m
   retryInterval: 1m
-  timeout: 3m
+  timeout: 5m
   postBuild:
     substitute:
       APP: *app

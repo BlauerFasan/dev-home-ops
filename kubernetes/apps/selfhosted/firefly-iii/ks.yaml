@@ -15,6 +15,7 @@ spec:
     - name: cloudnative-pg
     - name: rook-ceph-cluster
     - name: authentik
+    - name: smtp-relay
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
