@@ -3,7 +3,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: &name firefly-iii-cron
-  namespace: firefly-iii
   labels: &labels
     app.kubernetes.io/name: firefly-iii-cron
   annotations:

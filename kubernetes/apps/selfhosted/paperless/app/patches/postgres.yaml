@@ -2,7 +2,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: &app ghostfolio
+  name: &app paperless
 spec:
   values:
     initContainers:
@@ -12,7 +12,10 @@ spec:
           - name: INIT_POSTGRES_HOST
             value: ${POSTGRES_HOST}
           - name: INIT_POSTGRES_DBNAME
-            value: *app
+            valueFrom:
+              secretKeyRef:
+                name: paperless-secret
+                key: PAPERLESS_DBNAME
           - name: INIT_POSTGRES_SUPER_PASS
             valueFrom:
               secretKeyRef:
@@ -21,12 +24,11 @@ spec:
           - name: INIT_POSTGRES_USER
             valueFrom:
               secretKeyRef:
-                name: ghostfolio-secret
-                key: POSTGRES_USER
+                name: paperless-secret
+                key: PAPERLESS_DBUSER
           - name: INIT_POSTGRES_PASS
             valueFrom:
               secretKeyRef:
-                name: ghostfolio-secret
-                key: POSTGRES_PASSWORD
-
+                name: paperless-secret
+                key: PAPERLESS_DBPASS
 

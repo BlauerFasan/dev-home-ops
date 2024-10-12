@@ -3,18 +3,20 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app firefly-iii
+  name: &app paperless
   namespace: flux-system
 spec:
   targetNamespace: selfhosted
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/selfhosted/firefly-iii/app
+  path: ./kubernetes/apps/selfhosted/paperless/app
   dependsOn:
     - name: cloudnative-pg
-    - name: rook-ceph-cluster
+    - name: dragonfly-cluster
     - name: authentik
+    - name: gotenberg
+    - name: tika
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
@@ -26,4 +28,3 @@ spec:
   postBuild:
     substitute:
       APP: *app
-      VOLSYNC_CAPACITY: 5Gi

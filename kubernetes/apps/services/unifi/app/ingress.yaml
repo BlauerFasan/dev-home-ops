@@ -13,7 +13,7 @@ metadata:
     hajimari.io/group: "services"
     hajimari.io/icon: "wifi"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: "traefik-chain-cloudflare-secure-noauth@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-cloudflare-secure-noauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:

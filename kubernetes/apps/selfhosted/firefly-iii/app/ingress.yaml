@@ -13,7 +13,7 @@ metadata:
     hajimari.io/group: finance
     hajimari.io/appName: yosan
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: "traefik-chain-cloudflare-secure-forwardauth@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-cloudflare-secure-forwardauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
