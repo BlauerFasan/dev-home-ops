@@ -6,4 +6,5 @@ resources:
   # Pre Flux-Kustomizations
   - ./namespace.yaml
   # Flux-Kustomizations
-  # - ./traefik/ks.yaml
+  # - ./authentik/ks.yaml
+  # - ./vaultwarden/ks.yaml
