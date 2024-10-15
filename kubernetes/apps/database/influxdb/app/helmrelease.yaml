@@ -88,6 +88,6 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: influx
+        existingClaim: *app
         globalMounts:
           - path: /var/lib/influxdb2
