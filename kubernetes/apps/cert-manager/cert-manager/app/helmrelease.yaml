@@ -28,7 +28,8 @@ spec:
       retries: 3
 
   values:
-    installCRDs: true
+    crds:
+      enabled: true
     podDisruptionBudget:
       enabled: true
       minAvailable: 1
