@@ -125,19 +125,8 @@ patches:
     machine:
       network:
         nameservers:
-          - 1
-          - 7
-          - 2
-          - .
-          - 3
-          - 0
-          - .
-          - 1
-          - 0
-          - 0
-          - .
-          - 1
-          - 0
+          - 172.30.100.10
+          - 1.1.1.1
   - "@./patches/global/cluster-discovery.yaml"
   - "@./patches/global/containerd.yaml"
   - "@./patches/global/disable-search-domain.yaml"
