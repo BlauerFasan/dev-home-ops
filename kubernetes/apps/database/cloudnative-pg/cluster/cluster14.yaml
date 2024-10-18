@@ -3,10 +3,10 @@
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
-  name: postgres16
+  name: postgres14
 spec:
   instances: 3 # set to the number of nodes in the cluster
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.3
+  imageName: ghcr.io/cloudnative-pg/postgresql:14.9
   primaryUpdateStrategy: unsupervised
 
   storage:
@@ -26,8 +26,8 @@ spec:
 
   postgresql:
     parameters:
-      max_connections: "600"
-      max_slot_wal_keep_size: 20GB
+      max_connections: "300"
+      # max_slot_wal_keep_size: 20GB
       shared_buffers: 512MB
       timezone: ${CLUSTER_TIMEZONE}
 
@@ -46,7 +46,7 @@ spec:
         maxParallel: 8
       destinationPath: s3://postgresql/
       endpointURL: http://minio.minio.svc.cluster.local:9000
-      serverName: postgres16-v1
+      serverName: postgres-v4
       s3Credentials:
         accessKeyId:
           name: postgres-minio-secret
@@ -55,25 +55,25 @@ spec:
           name: postgres-minio-secret
           key: MINIO_SECRET_KEY
 
-  # bootstrap:
-  #   recovery:
-  #     source: &previous-cluster postgres-v3
-  # externalClusters:
-  #   - name: *previous-cluster
-  #     barmanObjectStore:
-  #       wal:
-  #         compression: bzip2
-  #         maxParallel: 8
-  #       destinationPath: s3://postgresql/
-  #       endpointURL: http://minio.minio.svc.cluster.local:9000
-  #       serverName: postgres-v3
-  #       s3Credentials:
-  #         accessKeyId:
-  #           name: postgres-minio-secret
-  #           key: MINIO_ACCESS_KEY
-  #         secretAccessKey:
-  #           name: postgres-minio-secret
-  #           key: MINIO_SECRET_KEY
+  bootstrap:
+    recovery:
+      source: &previous-cluster postgres-v3
+  externalClusters:
+    - name: *previous-cluster
+      barmanObjectStore:
+        wal:
+          compression: bzip2
+          maxParallel: 8
+        destinationPath: s3://postgresql/
+        endpointURL: http://minio.minio.svc.cluster.local:9000
+        serverName: postgres-v3
+        s3Credentials:
+          accessKeyId:
+            name: postgres-minio-secret
+            key: MINIO_ACCESS_KEY
+          secretAccessKey:
+            name: postgres-minio-secret
+            key: MINIO_SECRET_KEY
 
     # # this represents an existing cnpg cluster to migrate from (e.g. upgrading from postgres v14 to postgres v15)
     # - name: cluster-pg14
