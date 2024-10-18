@@ -32,7 +32,7 @@ spec:
   values:
     controllers:
       ghostfolio:
-        replicas: 0
+        replicas: 1
         strategy: RollingUpdate
         annotations:
           reloader.stakater.com/auto: "true"
