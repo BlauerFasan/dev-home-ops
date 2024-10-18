@@ -41,7 +41,7 @@ spec:
               pullPolicy: IfNotPresent
 
             env:
-              TZ: ${CLUSTER_TIMEZONE}$
+              TZ: ${CLUSTER_TIMEZONE}
               SYSTEM_DEFAULTLOCALE: de-DE
               DOCKER_ENABLE_SECURITY: false
               SECURITY_ENABLE_LOGIN: false

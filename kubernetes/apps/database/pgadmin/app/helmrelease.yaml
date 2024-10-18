@@ -80,7 +80,7 @@ spec:
       server-json:
         enabled: true
         type: configMap
-        name: servers-json
+        name: pgadmin-server-configmap
         globalMounts:
           - path: /pgadmin4/servers.json
             subPath: servers.json
