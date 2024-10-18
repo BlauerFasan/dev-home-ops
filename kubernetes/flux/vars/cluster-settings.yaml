@@ -10,5 +10,7 @@ data:
   CLUSTER_LB_UNIFI: "172.30.100.29"
   CLUSTER_LB_SMTP: "172.30.100.30"
   LOCAL_LAN_NAS: "172.30.100.13"
-  POSTGRES_HOST: "postgres-rw.database.svc.cluster.local."
+  POSTGRES_HOST_NEW: "postgres17-rw.database.svc.cluster.local."
+  POSTGRES_HOST_MAIN: "postgres16-rw.database.svc.cluster.local."
+  POSTGRES_HOST_OLD: "postgres-rw.database.svc.cluster.local."
   POSTGRES_PORT: "5432"
