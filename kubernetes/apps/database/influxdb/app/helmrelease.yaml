@@ -32,7 +32,7 @@ spec:
       automountServiceAccountToken: false
 
     controllers:
-      influx:
+      influxdb:
         annotations:
           reloader.stakater.com/auto: "true"
         containers:
