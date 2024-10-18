@@ -12,5 +12,5 @@ data:
   LOCAL_LAN_NAS: "172.30.100.13"
   POSTGRES_HOST_NEW: "postgres17-rw.database.svc.cluster.local."
   POSTGRES_HOST_MAIN: "postgres16-rw.database.svc.cluster.local."
-  POSTGRES_HOST_OLD: "postgres-rw.database.svc.cluster.local."
+  POSTGRES_HOST_OLD: "postgres14-rw.database.svc.cluster.local."
   POSTGRES_PORT: "5432"
