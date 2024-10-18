@@ -10,7 +10,7 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/ghostfolio/app
+  path: ./kubernetes/apps/selfhosted/ghostfolio/app
   dependsOn:
     - name: cloudnative-pg-cluster
     - name: dragonfly-cluster
