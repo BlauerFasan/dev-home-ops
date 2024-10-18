@@ -6,8 +6,8 @@ metadata:
   name: postgres-backup-schedule
 spec:
   # daily, 2am UCT
-  schedule: "@weekly"
+  schedule: "@daily"
   immediate: true
   backupOwnerReference: self
   cluster:
-    name: postgres
+    name: postgres14
