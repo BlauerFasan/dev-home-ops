@@ -1,9 +1,9 @@
 {
   "Servers": {
     "1": {
-        "Name": "postgres",
+        "Name": "postgres16",
         "Group": "Servers",
-        "Host": "${POSTGRES_HOST}",
+        "Host": "${POSTGRES_HOST_MAIN}",
         "Port": 5432,
         "MaintenanceDB": "postgres",
         "Username": "postgres",
