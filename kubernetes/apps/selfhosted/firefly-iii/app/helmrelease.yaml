@@ -90,6 +90,6 @@ spec:
         enabled: true
         existingClaim: *app
         advancedMounts:
-          main:
-            main:
+          firefly-iii:
+            app:
               - path: /var/www/html/firefly-iii/storage/upload
