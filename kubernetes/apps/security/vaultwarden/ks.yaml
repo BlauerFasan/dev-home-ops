@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   path: './kubernetes/apps/security/vaultwarden/app/'
   dependsOn:
-    - name: cloudnative-pg
+    - name: cloudnative-pg-cluster
     - name: rook-ceph-cluster
     - name: traefik
     - name: smtp-relay

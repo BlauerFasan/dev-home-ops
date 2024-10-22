@@ -69,11 +69,11 @@ spec:
               # YUBICO_SECRET_KEY:
               WEBSOCKET_ENABLED: true
               WEBSOCKET_ADDRESS: 0.0.0.0
-              # SMTP_HOST: smtp-relay.networking.svc.cluster.local.
-              # SMTP_PORT: 25
-              # SMTP_SECURITY: "off"
-              # SMTP_FROM: vaultwarden@${SECRET_DOMAIN}
-              # SMTP_FROM_NAME: Vaultwarden
+              SMTP_HOST: smtp-relay.networking.svc.cluster.local.
+              SMTP_PORT: 25
+              SMTP_SECURITY: "off"
+              SMTP_FROM: noreply@${SECRET_MAIL_DOMAIN}
+              SMTP_FROM_NAME: Vaultwarden
             envFrom:
               - secretRef:
                   name: vaultwarden-secret
