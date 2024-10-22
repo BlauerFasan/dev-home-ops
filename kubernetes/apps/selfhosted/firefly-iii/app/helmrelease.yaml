@@ -79,8 +79,8 @@ spec:
                 memory: 1Gi
 
     service:
-      main:
-        controller: main
+      app:
+        controller: *app
         ports:
           http:
             port: 8080
