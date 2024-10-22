@@ -5,7 +5,7 @@ metadata:
   name: authentik
   annotations:
     external-dns/is-public: "false"
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
     hajimari.io/icon: mdi:shield-account
     hajimari.io/group: serivces
