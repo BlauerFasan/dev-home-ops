@@ -30,6 +30,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: security-authentik
+                name: ak-outpost-authentik-embedded-outpost
                 port:
                   number: 9000
