@@ -8,7 +8,7 @@ metadata:
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     hajimari.io/enable: "false"
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-internal-secure-noauth@kubernetescrd"
+    traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-internal-secure-forwardauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
@@ -26,10 +26,10 @@ spec:
                 name: whoami
                 port:
                   number: 80
-          # - path: /outpost.goauthentik.io/
-          #   pathType: Prefix
-          #   backend:
-          #     service:
-          #       name: authentik-authentik
-          #       port:
-          #         number: 9000
+          - path: /outpost.goauthentik.io/
+            pathType: Prefix
+            backend:
+              service:
+                name: security-authentik
+                port:
+                  number: 9000
