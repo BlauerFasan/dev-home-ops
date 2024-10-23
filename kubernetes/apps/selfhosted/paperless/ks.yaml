@@ -12,7 +12,7 @@ spec:
       app.kubernetes.io/name: *app
   path: ./kubernetes/apps/selfhosted/paperless/app
   dependsOn:
-    - name: cloudnative-pg
+    - name: cloudnative-pg-cluster
     - name: dragonfly-cluster
     - name: authentik
     - name: gotenberg
