@@ -2,14 +2,13 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: &pv2 paperless-nfs-data
+  name: &pv paperless-nfs-data
 spec:
   capacity:
     storage: 1Mi
   accessModes:
     - ReadWriteMany
-    - ReadWriteOnce
-  storageClassName: *pv2
+  storageClassName: *pv
   persistentVolumeReclaimPolicy: Retain
   nfs:
     server: "${LOCAL_LAN_NAS}"
@@ -27,13 +26,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: paperless-nfs
-  annotations:
-    pv.beta.kubernetes.io/gid: "65539"
 spec:
   accessModes:
     - ReadWriteMany
-    - ReadWriteOnce
   storageClassName: paperless-nfs-data
   resources:
     requests:
-      storage: 1Mi
+      storage: 1Ti
