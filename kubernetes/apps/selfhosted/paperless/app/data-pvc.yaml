@@ -5,7 +5,7 @@ metadata:
   name: &pv paperless-nfs-data
 spec:
   capacity:
-    storage: 1Mi
+    storage: 1Ti
   accessModes:
     - ReadWriteMany
   storageClassName: *pv
