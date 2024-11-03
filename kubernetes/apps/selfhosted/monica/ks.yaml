@@ -34,7 +34,7 @@ metadata:
   name: &app monica
   namespace: flux-system
 spec:
-  targetNamespace: database
+  targetNamespace: selfhosted
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app

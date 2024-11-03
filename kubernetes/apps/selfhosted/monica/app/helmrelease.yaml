@@ -50,8 +50,8 @@ spec:
               APP_TRUSTED_PROXIES: "*"
               DEFAULT_MAX_UPLOAD_SIZE: 2000
               DEFAULT_MAX_STORAGE_SIZE: 4096
-              MAIL_MAILER: smtp
-              MAIL_HOST: smtp-relay.networking.svc.cluster.local.
+              # MAIL_MAILER: smtp
+              # MAIL_HOST: smtp-relay.networking.svc.cluster.local.
               # MAIL_PORT: 25
               # FILESYSTEM_DISK: s3
               # AWS_ENDPOINT: https://s3.${SECRET_DOMAIN}
