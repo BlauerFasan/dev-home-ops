@@ -18,7 +18,7 @@ endpointRoutes:
 envoy:
   enabled: false
 hubble:
-  enabled: true
+  enabled: false
 ipam:
   mode: kubernetes
 ipv4NativeRoutingCIDR: "10.69.0.0/16"
@@ -30,7 +30,7 @@ l2announcements:
   enabled: true
 loadBalancer:
   algorithm: maglev
-  mode: dsr
+  mode: "dsr"
 localRedirectPolicy: true
 operator:
   replicas: 1
