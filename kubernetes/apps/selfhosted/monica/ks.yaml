@@ -24,7 +24,7 @@ spec:
   timeout: 5m
   postBuild:
     substitute:
-      APP: *app
+      APP: monicadb-1
       VOLSYNC_CAPACITY: 10Gi
 ---
 # yaml-language-server: $schema=https://raw.githubusercontent.com/fluxcd-community/flux2-schemas/main/kustomization-kustomize-v1.json
@@ -53,5 +53,5 @@ spec:
   timeout: 5m
   postBuild:
     substitute:
-      APP: *app
+      APP: monica-1
       VOLSYNC_CAPACITY: 2Gi

@@ -35,7 +35,7 @@ spec:
     primary:
       persistence:
         enabled: true
-        existingClaim: *app
+        existingClaim: monicadb-1
 
       resources:
         requests:
