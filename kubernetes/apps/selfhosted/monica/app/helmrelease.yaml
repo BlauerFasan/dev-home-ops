@@ -79,7 +79,7 @@ spec:
     persistence:
       config:
         enabled: true
-        existingClaim: monica-1
+        existingClaim: *app
         globalMounts:
           - path: /config
 
