@@ -43,6 +43,7 @@ spec:
     - name: monica-db
     - name: rook-ceph-cluster
     - name: traefik
+    - name: dragonfly-cluster
   sourceRef:
     kind: GitRepository
     name: home-kubernetes

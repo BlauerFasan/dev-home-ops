@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: mariadb
-      version: 19.0.7
+      version: 19.1.1
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -43,3 +43,9 @@ spec:
           memory: 143Mi
         limits:
           memory: 143Mi
+
+    # initdbScripts:
+    #   create-pterodactyl.sql: |
+    #     CREATE DATABASE IF NOT EXISTS panel;
+    #     CREATE USER IF NOT EXISTS 'pterodactyl'@'%' IDENTIFIED BY '${PTERODACTYL_MARIADB_PASSWORD}';
+    #     GRANT ALL PRIVILEGES ON panel.* to 'pterodactyl'@'%';
