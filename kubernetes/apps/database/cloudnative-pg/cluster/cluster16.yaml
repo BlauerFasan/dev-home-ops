@@ -6,7 +6,7 @@ metadata:
   name: postgres16
 spec:
   instances: 3 # set to the number of nodes in the cluster
-  imageName: ghcr.io/cloudnative-pg/postgresql:16.3
+  imageName: ghcr.io/cloudnative-pg/postgresql:16.4
   primaryUpdateStrategy: unsupervised
 
   storage:
@@ -33,7 +33,7 @@ spec:
 
   monitoring:
     enablePodMonitor: true
-    Ref: https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
+    # Ref: https://github.com/cloudnative-pg/cloudnative-pg/issues/2501
     podMonitorMetricRelabelings:
       - { sourceLabels: ["cluster"], targetLabel: cnpg_cluster, action: replace }
       - { regex: cluster, action: labeldrop }
