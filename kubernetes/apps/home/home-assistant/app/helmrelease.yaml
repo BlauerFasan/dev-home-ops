@@ -38,8 +38,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/home-assistant/home-assistant
-              tag: 2024.11.1@sha256:c01d6c54679a1934a2bd62a8e3289cd1439b45b82dc5b2dba01793368c500908
+              repository:  ghcr.io/onedr0p/home-assistant
+              tag: 2024.11.1@sha256:a3dd7577c28771702b21f817ad86600056467c2c7f45d261a1e7241910ddc2e2
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
