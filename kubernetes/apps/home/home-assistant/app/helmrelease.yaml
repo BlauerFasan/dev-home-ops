@@ -43,22 +43,17 @@ spec:
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
-              HOME_ASSISTANT_EXTERNAL_URL: https://hass.${SECRET_DOMAIN}
+              HOME_ASSISTANT_EXTERNAL_URL: https://kaseihu.${SECRET_DOMAIN}
               HOME_ASSISTANT_UNIT_SYSTEM: metric
-              POSTGRES_HOST: ${POSTGRES_HOST}
-              POSTGRES_DB: home_assistant
 
             envFrom:
               - secretRef:
                   name: home-assistant-secret
 
-            probes:
-              liveness:
-                enabled: false
-              readiness:
-                enabled: false
-              startup:
-                enabled: false
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
 
             resources:
               requests:
@@ -72,40 +67,53 @@ spec:
               repository: ghcr.io/coder/code-server
               tag: 4.95.1@sha256:d9bc7797d997e1b199e333676732e075bac4bae276dc0fe1baece2e313edfa09
 
-            args:
-              - --auth
-              - none
-              - --user-data-dir
-              - "/config/.vscode"
-              - --extensions-dir
-              - "/config/.vscode"
-              - --port
-              - "8080"
-              - "/config"
+            args: [
+              "--auth", "none",
+              "--user-data-dir", "/config/.vscode",
+              "--extensions-dir", "/config/.vscode",
+              "--port", "12321",
+              "/config"
+            ]
+
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 512Mi
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
 
     service:
-      main:
+      app:
         controller: *app
         ports:
           http:
             port: 8123
-          code:
+          code-server:
             enabled: true
-            port: 8080
-
-    serviceMonitor:
-      app:
-        serviceName: minio
-        endpoints:
-          - port: s3
-            scheme: http
-            path: /minio/v2/metrics/cluster
-            interval: 1m
-            scrapeTimeout: 10s
+            port: 12321
 
     persistence:
-      data:
-        enabled: true
-        existingClaim: minio-data-v1
+      config:
+        existingClaim: *app
         globalMounts:
-          - path: /data
+          - path: /config
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/logs
+      tts:
+        type: emptyDir
+        globalMounts:
+          - path: /config/tts
+      tmp:
+        type: emptyDir
+        globalMounts:
+          - path: /tmp

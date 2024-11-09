@@ -16,10 +16,10 @@ spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "hass-code.${SECRET_DOMAIN}"
-      secretName: "hass-code.${SECRET_DOMAIN//./-}-prod-tls"
+        - "kaseihu-code.${SECRET_DOMAIN}"
+      secretName: "kaseihu-code.${SECRET_DOMAIN//./-}-prod-tls"
   rules:
-    - host: hass-code.${SECRET_DOMAIN}
+    - host: kaseihu-code.${SECRET_DOMAIN}
       http:
         paths:
           - path: /
@@ -28,4 +28,4 @@ spec:
               service:
                 name: code-server
                 port:
-                  number: 8080
+                  number: 12321
