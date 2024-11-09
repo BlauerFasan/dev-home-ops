@@ -26,6 +26,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: code-server
+                name: app
                 port:
                   number: 12321
