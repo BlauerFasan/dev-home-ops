@@ -45,6 +45,7 @@ spec:
               TZ: ${CLUSTER_TIMEZONE}
               HOME_ASSISTANT_EXTERNAL_URL: https://kaseihu.${SECRET_DOMAIN}
               HOME_ASSISTANT_UNIT_SYSTEM: metric
+              HASS_HTTP_TRUSTED_PROXY: 10.69.0.0/16
 
             envFrom:
               - secretRef:
