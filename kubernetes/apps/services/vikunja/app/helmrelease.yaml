@@ -77,7 +77,7 @@ spec:
           proxy:
             image:
               repository: caddy
-              tag: 2.8.4-alpine@sha256:33937b9d51461ea87794350c1c09ce53f327802508929d78f3b5642533f2f7db
+              tag: 2.8.4-alpine@sha256:e97e0e3f8f51be708a9d5fadbbd75e3398c22fc0eecd4b26d48561e3f7daa9eb
               pullPolicy: IfNotPresent
 
             resources:
