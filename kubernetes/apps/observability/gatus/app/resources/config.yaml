@@ -35,7 +35,7 @@ endpoints:
     url: https://kansatsu.${SECRET_DOMAIN_2}
     interval: 1m
     client:
-      dns-resolver: tcp://1.1.1.1:53
+      dns-resolver: tcp://172.30.100.10:53
     conditions:
       - "[STATUS] == 200"
     alerts:
