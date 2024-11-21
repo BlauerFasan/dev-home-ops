@@ -73,11 +73,14 @@ spec:
               TZ: ${CLUSTER_TIMEZONE}
               GATUS_CONFIG_PATH: /config
               GATUS_DELAY_START_SECONDS: 5
-              WEB_PORT: &port 80
+              SECRET_EXTERNAL_DOMAIN: ${SECRET_DOMAIN_2}
+              WEB_PORT: &port 8080
 
             envFrom:
               - secretRef:
                   name: gatus-secrets
+              - secretRef:
+                  name: gatus-init-db
 
             probes:
               liveness: &probes

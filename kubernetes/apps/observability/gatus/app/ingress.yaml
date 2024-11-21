@@ -19,7 +19,7 @@ spec:
         - "kansatsu.${SECRET_DOMAIN_2}"
       secretName: "kansatsu.rb.${SECRET_DOMAIN//./-}-prod-tls"
   rules:
-    - host: kansatsu.${SECRET_DOMAIN}
+    - host: kansatsu.${SECRET_DOMAIN_2}
       http:
         paths:
           - path: /
@@ -28,4 +28,4 @@ spec:
               service:
                 name: gatus
                 port:
-                  number: 80
+                  number: 8080
