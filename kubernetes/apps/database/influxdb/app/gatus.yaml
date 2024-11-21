@@ -2,15 +2,15 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: postgres-gatus-ep
+  name: influxdb-gatus-ep
   labels:
     gatus.io/enabled: "true"
 data:
   config.yaml: |
     endpoints:
-      - name: Postgres
+      - name: Influxdb
         group: infrastructure
-        url: tcp://postgres16-rw.database.svc.cluster.local:5432
+        url: tcp://influxdb.database.svc.cluster.local:8086
         interval: 1m
         ui:
           hide-url: true
