@@ -30,9 +30,9 @@ connectivity:
     target: 1.1.1.1:53
     interval: 1m
 endpoints:
-  - name: status
+  - name: Gatus
     group: external
-    url: https://kansatsu.${SECRET_DOMAIN_2}
+    url: https://kansatsu.${GATUS_DOMIAN}
     interval: 1m
     client:
       dns-resolver: tcp://172.30.100.10:53
