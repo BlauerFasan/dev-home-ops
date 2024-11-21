@@ -23,4 +23,5 @@ spec:
   postBuild:
     substitute:
       APP: *app
+      GATUS_DOMAIN: ${SECRET_DOMAIN_2}
       GATUS_PATH: /talos_version

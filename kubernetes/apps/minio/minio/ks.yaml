@@ -30,4 +30,5 @@ spec:
     substitute:
       APP: *app
       GATUS_GROUP: infrastructure
+      GATUS_PATH: /login
 

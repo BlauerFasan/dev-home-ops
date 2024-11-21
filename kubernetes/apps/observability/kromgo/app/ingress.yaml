@@ -14,9 +14,9 @@ spec:
   tls:
     - hosts:
         - "kromgo.${SECRET_DOMAIN_2}"
-      secretName: "kromgo.${SECRET_DOMAIN//./-}-prod-tls"
+      secretName: "kromgo.${SECRET_DOMAIN_2//./-}-prod-tls"
   rules:
-    - host: kromgo.${SECRET_DOMAIN}
+    - host: kromgo.${SECRET_DOMAIN_2}
       http:
         paths:
           - path: /

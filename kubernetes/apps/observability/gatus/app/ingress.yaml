@@ -17,7 +17,7 @@ spec:
   tls:
     - hosts:
         - "kansatsu.${SECRET_DOMAIN_2}"
-      secretName: "kansatsu.rb.${SECRET_DOMAIN//./-}-prod-tls"
+      secretName: "kansatsu.${SECRET_DOMAIN_2//./-}-prod-tls"
   rules:
     - host: kansatsu.${SECRET_DOMAIN_2}
       http:
