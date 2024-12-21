@@ -1,0 +1,28 @@
+---
+# yaml-language-server: $schema=https://kubernetes-schemas.pages.dev/kustomize.toolkit.fluxcd.io/kustomization_v1.json
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: &app invidious
+  namespace: flux-system
+spec:
+  targetNamespace: services
+  commonMetadata:
+    labels:
+      app.kubernetes.io/name: *app
+  path: ./kubernetes/apps/services/invidious/app
+  dependsOn:
+    - name: traefik
+  sourceRef:
+    kind: GitRepository
+    name: home-kubernetes
+  prune: true
+  wait: false
+  interval: 30m
+  timeout: 5m
+  postBuild:
+    substitute:
+      APP: *app
+      GATUS_SUBDOMAIN: youtube
+      GATUS_DOMAIN: ${SECRET_DOMAIN_2}
+      GATUS_GROUP: services
