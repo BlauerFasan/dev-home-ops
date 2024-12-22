@@ -36,7 +36,7 @@ spec:
           app:
             image:
               repository: thecodingmachine/gotenberg
-              tag: 8.14.1
+              tag: 8.15.0
             command: [gotenberg]
             args: [--chromium-disable-routes=true]
 
