@@ -67,7 +67,7 @@ spec:
               SONARR__APP__INSTANCENAME: Sonarr
               SONARR__APP__THEME: dark
               # Auth
-              SONARR__AUTH__METHOD: Externals
+              SONARR__AUTH__METHOD: External
               SONARR__AUTH__REQUIRED: DisabledForLocalAddresses
               # Logging
               SONARR__LOG__DBENABLED: "False"
@@ -117,16 +117,16 @@ spec:
           - path: /config
       downloads:
         type: nfs
-        server: 192.168.9.10
+        server: ${LOCAL_LAN_NAS}
         path: /var/mnt/vol1/downloads
         globalMounts:
-          - path: /mnt/storage/downloads
+          - path: /volume1/dev/video/downloads
       video:
         type: nfs
-        server: 192.168.9.10
+        server: ${LOCAL_LAN_NAS}
         path: /var/mnt/vol1/video
         globalMounts:
-          - path: /mnt/storage/video
+          - path: /volume1/dev/video/TV-Serien
       scripts:
         type: configMap
         name: sonarr-pushover
