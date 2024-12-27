@@ -3,7 +3,7 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: &app sonarr
+  name: &app paperless
 
 spec:
   interval: 30m
@@ -118,15 +118,15 @@ spec:
       downloads:
         type: nfs
         server: ${LOCAL_LAN_NAS}
-        path: /var/mnt/vol1/downloads
+        path: /volume1/dev/video/downloads
         globalMounts:
-          - path: /volume1/dev/video/downloads
+          - path: /mnt/storage/downloads
       video:
         type: nfs
         server: ${LOCAL_LAN_NAS}
-        path: /var/mnt/vol1/video
+        path: /volume1/dev/video/TV-Serien
         globalMounts:
-          - path: /volume1/dev/video/TV-Serien
+          - path: /mnt/storage/video
       scripts:
         type: configMap
         name: sonarr-pushover
