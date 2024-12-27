@@ -8,6 +8,6 @@ resources:
   # Flux-Kustomizations
   # - ./bazarr/ks.yaml
   # - ./radarr/ks.yaml
-  # - ./sonarr/ks.yaml
+  - ./sonarr/ks.yaml
   # - ./tdarr/ks.yaml
 
