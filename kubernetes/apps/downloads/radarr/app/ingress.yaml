@@ -28,4 +28,4 @@ spec:
               service:
                 name: radarr
                 port:
-                  number: 8123
+                  number: 80
