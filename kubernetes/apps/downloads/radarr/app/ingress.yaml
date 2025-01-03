@@ -2,30 +2,30 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: home-assistant
+  name: radarr
   annotations:
     external-dns/is-public: "false"
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     hajimari.io/enable: "true"
-    hajimari.io/appName: "home-assistant"
-    hajimari.io/group: "home"
-    hajimari.io/icon: mdi:home-assistant
+    hajimari.io/appName: "Radarr"
+    hajimari.io/group: "downloads"
+    hajimari.io/icon: mdi:library-movie
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
     traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-internal-default-noauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
     - hosts:
-        - "kaseihu.${SECRET_DOMAIN}"
-      secretName: "kaseihu.${SECRET_DOMAIN//./-}-prod-tls"
+        - "radarr.${SECRET_DOMAIN}"
+      secretName: "radarr.${SECRET_DOMAIN//./-}-prod-tls"
   rules:
-    - host: kaseihu.${SECRET_DOMAIN}
+    - host: radarr.${SECRET_DOMAIN}
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: home-assistant
+                name: radarr
                 port:
                   number: 8123

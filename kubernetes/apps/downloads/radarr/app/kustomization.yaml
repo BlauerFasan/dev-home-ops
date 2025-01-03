@@ -8,4 +8,12 @@ resources:
   - ./ingress.yaml
   - ../../../../templates/gatus/guarded
   - ../../../../templates/volsync
+configMapGenerator:
+  - name: radarr-pushover
+    files:
+      - ./scripts/pushover-notify.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled
 

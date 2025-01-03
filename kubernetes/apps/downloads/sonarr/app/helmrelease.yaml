@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.5.1
+      version: 3.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -31,13 +31,6 @@ spec:
     keepHistory: false
 
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-
     controllers:
       sonarr:
         replicas: 1
@@ -95,12 +88,26 @@ spec:
               startup:
                 enabled: false
 
+            securityContext:
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+
             resources:
               requests:
                 cpu: 10m
                 memory: 256M
               limits:
                 memory: 2Gi
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile: { type: RuntimeDefault }
 
     service:
       main:
@@ -115,16 +122,10 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /config
-      downloads:
+      media:
         type: nfs
         server: ${LOCAL_LAN_NAS}
-        path: /volume1/dev/video/downloads
-        globalMounts:
-          - path: /mnt/storage/downloads
-      video:
-        type: nfs
-        server: ${LOCAL_LAN_NAS}
-        path: /volume1/dev/video/TV-Serien
+        path: /volume1/dev/video
         globalMounts:
           - path: /mnt/storage/video
       scripts:
