@@ -114,7 +114,6 @@ spec:
           http:
             port: *port
 
-
     persistence:
       config:
         enabled: true

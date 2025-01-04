@@ -8,12 +8,11 @@ resources:
   - ./ingress.yaml
   - ../../../../templates/gatus/guarded
   - ../../../../templates/volsync
-# configMapGenerator:
-#   - name: bazarr-scripts
-#     files:
-#       - post-process.sh=./scripts/post-process.sh
-# configurations:
-#   - ./patches/kustomizeconfig.yaml
-# generatorOptions:
-#   disableNameSuffixHash: true
-
+configMapGenerator:
+  - name: bazarr-scripts
+    files:
+      - post-process.sh=./scripts/post-process.sh
+generatorOptions:
+  disableNameSuffixHash: true
+  annotations:
+    kustomize.toolkit.fluxcd.io/substitute: disabled

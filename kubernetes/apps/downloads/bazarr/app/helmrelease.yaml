@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: app-template
-      version: 3.5.1
+      version: 3.6.0
       interval: 30m
       sourceRef:
         kind: HelmRepository
@@ -31,13 +31,6 @@ spec:
     keepHistory: false
 
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-
     controllers:
       bazarr:
         replicas: 1
@@ -66,12 +59,7 @@ spec:
 
             envFrom:
               - secretRef:
-                  name: paperless-secret
-
-            securityContext:
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+                  name: bazarr-secret
 
             probes:
               liveness: &probes
@@ -79,7 +67,7 @@ spec:
                 custom: true
                 spec:
                   httpGet:
-                    path: /ping
+                    path: /health
                     port: &port 6767
                   initialDelaySeconds: 0
                   periodSeconds: 10
@@ -87,12 +75,46 @@ spec:
                   failureThreshold: 3
               readiness: *probes
 
+            securityContext: &securityContext
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
+
             resources:
               requests:
                 cpu: 23m
                 memory: 300Mi
               limits:
                 memory: 500Mi
+
+          subcleaner:
+            image:
+              repository: registry.k8s.io/git-sync/git-sync
+              tag: v4.4.0@sha256:0330739a707a2969d617e859f096659ab6d149212658ac0ad7e550b59482ebf0
+
+            env:
+              GITSYNC_REPO: https://github.com/KBlixt/subcleaner
+              GITSYNC_REF: master
+              GITSYNC_PERIOD: 24h
+              GITSYNC_ROOT: /subcleaner
+
+            resources:
+              requests:
+                cpu: 10m
+              limits:
+                memory: 128Mi
+
+            securityContext: *securityContext
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1033
+        runAsGroup: 65538
+        fsGroup: 65538
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [ 100 ]
+        seccompProfile: { type: RuntimeDefault }
 
     service:
       app:
@@ -107,22 +129,17 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /config
-      add-ons:
-        enabled: true
-        type: emptyDir
-        globalMounts:
-          - path: /add-ons
-      video:
-        enabled: true
+      media:
         type: nfs
-        server: 192.168.9.10
-        path: /var/mnt/vol1/video
+        server: ${LOCAL_LAN_NAS}
+        path: /volume1/dev/video
         globalMounts:
           - path: /mnt/storage/video
       scripts:
-        enabled: true
         type: configMap
-        name: bazarr-scripts # overriden by kustomizeconfig
+        name: bazarr-scripts
         defaultMode: 0775
         globalMounts:
-          - path: /scripts
+          - path: /scripts/post-process.sh
+            subPath: post-process.sh
+            readOnly: true
