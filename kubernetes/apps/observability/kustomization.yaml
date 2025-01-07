@@ -9,4 +9,4 @@ resources:
   # - ./gatus/ks.yaml
   # - ./grafana/ks.yaml
   # - ./kromgo/ks.yaml
-  - ./prometheus-operator-crds/ks.yaml
+  # - ./prometheus-operator-crds/ks.yaml
