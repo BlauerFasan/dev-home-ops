@@ -8,8 +8,10 @@ resources:
   # Flux-Kustomizations
   - ./cilium/ks.yaml
   - ./coredns/ks.yaml
-  - ./metrics-server/ks.yaml
-  - ./reloader/ks.yaml
+  - ./intel-device-plugin/ks.yaml
   - ./kubelet-csr-approver/ks.yaml
-  - ./spegel/ks.yaml
+  - ./metrics-server/ks.yaml
+  - ./node-feature-discovery/ks.yaml
+  - ./reloader/ks.yaml
   - ./snapshot-controller/ks.yaml
+  - ./spegel/ks.yaml
