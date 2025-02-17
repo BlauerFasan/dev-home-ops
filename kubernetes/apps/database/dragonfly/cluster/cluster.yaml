@@ -5,7 +5,7 @@ kind: Dragonfly
 metadata:
   name: dragonfly
 spec:
-  image: ghcr.io/dragonflydb/dragonfly:v1.26.0@sha256:b4e8651a30f3126b67f65d923657d9fb2438003cdae816c0b41dd5b8e28dd7f2
+  image: ghcr.io/dragonflydb/dragonfly:v1.27.1@sha256:a58c7b067f5f22957da90f5a5f78b845924ad4453c6b7e23bb756d2cf248632e
   replicas: 3 # set to the number of nodes in the cluster
   env:
     - name: MAX_MEMORY
