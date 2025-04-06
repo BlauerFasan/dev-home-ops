@@ -107,8 +107,10 @@ spec:
         expose:
           default: true
       web:
-        redirectTo:
-          port: websecure
+        redirections:
+          entryPoint:
+            to: websecure
+            scheme: https
       websecure:
         http3:
           enabled: true
@@ -122,6 +124,9 @@ spec:
             - main: "${SECRET_DOMAIN_2}"
               sans:
                 - "*.${SECRET_DOMAIN_2}"
+            - main: "${SECRET_DOMAIN_3}"
+              sans:
+                - "*.${SECRET_DOMAIN_3}"
 
       metrics:
         port: 8082
