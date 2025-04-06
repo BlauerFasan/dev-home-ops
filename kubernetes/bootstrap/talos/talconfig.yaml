@@ -22,7 +22,7 @@ cniConfig:
 
 nodes:
   - hostname: "chrb-vmd-ms1"
-    ipAddress: "172.30.100.50"
+    ipAddress: "172.30.100.44"
     installDisk: "/dev/vda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: true
@@ -31,7 +31,7 @@ nodes:
           hardwareAddr: "06:9d:65:76:f8:a9"
         dhcp: false
         addresses:
-          - "172.30.100.50/26"
+          - "172.30.100.44/26"
         routes:
           - network: 0.0.0.0/0
             gateway: "172.30.100.1"
@@ -39,7 +39,7 @@ nodes:
         vip:
           ip: "172.30.100.25"
   - hostname: "chrb-vmd-ms2"
-    ipAddress: "172.30.100.52"
+    ipAddress: "172.30.100.45"
     installDisk: "/dev/vda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: true
@@ -48,7 +48,7 @@ nodes:
           hardwareAddr: "3e:c2:68:5f:6d:c2"
         dhcp: false
         addresses:
-          - "172.30.100.52/26"
+          - "172.30.100.45/26"
         routes:
           - network: 0.0.0.0/0
             gateway: "172.30.100.1"
@@ -56,7 +56,7 @@ nodes:
         vip:
           ip: "172.30.100.25"
   - hostname: "chrb-vmd-ms3"
-    ipAddress: "172.30.100.54"
+    ipAddress: "172.30.100.46"
     installDisk: "/dev/vda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: true
@@ -65,7 +65,7 @@ nodes:
           hardwareAddr: "32:9c:f3:f9:3f:86"
         dhcp: false
         addresses:
-          - "172.30.100.54/26"
+          - "172.30.100.46/26"
         routes:
           - network: 0.0.0.0/0
             gateway: "172.30.100.1"
@@ -73,7 +73,7 @@ nodes:
         vip:
           ip: "172.30.100.25"
   - hostname: "chrb-vmd-nd1"
-    ipAddress: "172.30.100.51"
+    ipAddress: "172.30.100.47"
     installDisk: "/dev/vda"
     talosImageURL: factory.talos.dev/installer/ed036d0640097a4e7af413ee089851a12963cd2e2e1715f8866d551d17c2ec62
     controlPlane: false
@@ -82,13 +82,13 @@ nodes:
           hardwareAddr: "06:9d:65:76:f8:aa"
         dhcp: false
         addresses:
-          - "172.30.100.51/26"
+          - "172.30.100.47/26"
         routes:
           - network: 0.0.0.0/0
             gateway: "172.30.100.1"
         mtu: 1500
   - hostname: "chrb-vmd-nd2"
-    ipAddress: "172.30.100.53"
+    ipAddress: "172.30.100.48"
     installDisk: "/dev/vda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: false
@@ -97,13 +97,13 @@ nodes:
           hardwareAddr: "3e:c2:68:5f:6d:c3"
         dhcp: false
         addresses:
-          - "172.30.100.53/26"
+          - "172.30.100.48/26"
         routes:
           - network: 0.0.0.0/0
             gateway: "172.30.100.1"
         mtu: 1500
   - hostname: "chrb-vmd-nd3"
-    ipAddress: "172.30.100.55"
+    ipAddress: "172.30.100.49"
     installDisk: "/dev/vda"
     talosImageURL: factory.talos.dev/installer/376567988ad370138ad8b2698212367b8edcb69b5fd68c80be1f2ec7d603b4ba
     controlPlane: false
@@ -112,7 +112,7 @@ nodes:
           hardwareAddr: "32:9c:f3:f9:3f:87"
         dhcp: false
         addresses:
-          - "172.30.100.55/26"
+          - "172.30.100.49/26"
         routes:
           - network: 0.0.0.0/0
             gateway: "172.30.100.1"
