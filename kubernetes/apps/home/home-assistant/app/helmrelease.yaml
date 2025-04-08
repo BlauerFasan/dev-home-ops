@@ -39,7 +39,7 @@ spec:
           app:
             image:
               repository:  ghcr.io/onedr0p/home-assistant
-              tag: 2025.1.1@sha256:927198fc12979546cb68cf10a742255b6d5cf0f462958192182df86488ab1fe9
+              tag: 2025.3.3@sha256:9e2a7177b4600653d6cb46dff01b1598189a5ae93be0b99242fbc039d32d79f1
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
