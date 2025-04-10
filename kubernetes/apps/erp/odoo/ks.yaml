@@ -3,7 +3,7 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: &app odooo
+  name: &app odoo
   namespace: flux-system
 spec:
   targetNamespace: erp
@@ -33,3 +33,4 @@ spec:
     substitute:
       APP: *app
       VOLSYNC_CAPACITY: 5Gi
+      VOLSYNC_GID: "100"
