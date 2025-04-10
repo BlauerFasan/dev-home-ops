@@ -65,16 +65,16 @@ spec:
               limits:
                 memory: 4Gi
 
-            securityContext:
-              runAsUser: 568
-              runAsGroup: 568
-              fsGroup: 568
-              fsGroupChangePolicy: OnRootMismatch
-              supplementalGroups: [100]
+            # securityContext:
+            #   runAsUser: 568
+            #   runAsGroup: 568
+            #   fsGroup: 568
+            #   fsGroupChangePolicy: OnRootMismatch
+            #   supplementalGroups: [100]
 
-              allowPrivilegeEscalation: false
-              readOnlyRootFilesystem: true
-              capabilities: { drop: ["ALL"] }
+            #   allowPrivilegeEscalation: false
+            #   readOnlyRootFilesystem: true
+            #   capabilities: { drop: ["ALL"] }
 
     service:
       app:
