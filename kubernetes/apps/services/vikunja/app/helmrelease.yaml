@@ -1,5 +1,5 @@
 ---
-# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2beta2.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -35,22 +35,38 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: "17.4"
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: vikunja-init-db
+
         containers:
           app:
             image:
-              repository: vikunja/api
-              tag: 0.22.1@sha256:c9415431e6235229302bb8f9ee6660b74c24859d1e8adbc4a3e25bd418604b57
+              repository: docker.io/vikunja/vikunja
+              tag: 0.24.6@sha256:ed1f3ed467fecec0b57e9de7bc6607f8bbcbb23ffced6a81f5dfefc794cdbe3b
 
             env:
               VIKUNJA_SERVICE_TIMEZONE: ${CLUSTER_TIMEZONE}
-              VIKUNJA_SERVICE_FRONTENDURL: yarukoto.${SECRET_DOMAIN}
+              VIKUNJA_SERVICE_PUBLICURL: yarukoto.${SECRET_DOMAIN}
+              VIKUNJA_SERVICE_ENABLETASKATTACHMENTS: true
               VIKUNJA_SERVICE_ENABLEREGISTRATION: true
+              VIKUNJA_SERVICE_ENABLEEMAILREMINDERS: true
               VIKUNJA_DEFAULTSETTINGS_WEEK_START: 1
               VIKUNJA_DEFAULTSETTINGS_TIMEZONE: ${CLUSTER_TIMEZONE}
               VIKUNJA_MAILER_ENABLED: true
               VIKUNJA_MAILER_HOST: smtp-relay.networking.svc.cluster.local.
               VIKUNJA_MAILER_PORT: "25"
-              VIKUNJA_MAILER_FROMEMAIL: Vikunja <yarukoto@${SECRET_DOMAIN}>
+              VIKUNJA_MAILER_FROMEMAIL: Vikunja <noreply@${SECRET_DOMIAN_3}>
+              VIKUNJA_CACHE_ENABLED: 1
+              VIKUNJA_CACHE_TYPE: redis
+              VIKUNJA_REDIS_ENABLED: true
+              VIKUNJA_REDIS_HOST: dragonfly.database.svc.cluster.local:6379
             envFrom:
               - secretRef:
                   name: vikunja-secret
@@ -62,37 +78,12 @@ spec:
               limits:
                 memory: 300Mi
 
-          frontend:
-            image:
-              repository: vikunja/frontend
-              tag: 0.22.1@sha256:f0223d441997fe29c377d0b476dc4bb2fc091b44b9c24d76b1b88c213df520c5
-
-            resources:
-              requests:
-                cpu: 10m
-                memory: 26Mi
-              limits:
-                memory: 28Mi
-
-          proxy:
-            image:
-              repository: caddy
-              tag: 2.9.1-alpine@sha256:b4e3952384eb9524a887633ce65c752dd7c71314d2c2acf98cd5c715aaa534f0
-              pullPolicy: IfNotPresent
-
-            resources:
-              requests:
-                cpu: 15m
-                memory: 30Mi
-              limits:
-                memory: 100Mi
-
     service:
       app:
         controller: *app
         ports:
           http:
-            port: 8080
+            port: 3456
 
     persistence:
       config:
@@ -111,12 +102,3 @@ spec:
             app:
               - path: /etc/vikunja/config.yml
                 subPath: config.yml
-      caddy-config:
-        enabled: true
-        type: configMap
-        name: vikunja-configmap
-        advancedMounts:
-          vikunja:
-            proxy:
-              - path: /etc/caddy/Caddyfile
-                subPath: Caddyfile
