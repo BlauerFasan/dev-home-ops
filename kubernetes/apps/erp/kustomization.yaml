@@ -7,4 +7,4 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   # - ./erpnext/ks.yaml
-  - ./odoo/ks.yaml
+  # - ./odoo/ks.yaml
