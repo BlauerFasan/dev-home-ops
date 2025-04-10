@@ -48,7 +48,7 @@ spec:
         containers:
           app:
             image:
-              repository:  docker.io/odoo/odoo
+              repository:  odoo/odoo
               tag: 18.0-20250401@sha256:1fbf43e95af59e36ce62047c0488bb4b343a36476cb32be634a295d551251935
 
             env:
