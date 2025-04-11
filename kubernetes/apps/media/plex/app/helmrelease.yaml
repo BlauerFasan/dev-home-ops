@@ -42,7 +42,7 @@ spec:
           app:
             image:
               repository: ghcr.io/home-operations/plex
-              tag: 1.41.3.9314-a0bfb8370@sha256:38fcbef239341db591f8ff87f20777d9a783b79f757fc42e360041d7ba78eada
+              tag: 1.41.6.9685@sha256:37d36646471fb905a0080daaaa1f09ad3370b06149ed5f94dad73ead591cad0e
 
             env:
               #General
