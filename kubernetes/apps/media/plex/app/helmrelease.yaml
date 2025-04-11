@@ -38,16 +38,11 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
-        pod:
-          nodeSelector:
-            kubernetes.io/hostname: chrb-vmp-nd3
-
         containers:
           app:
             image:
               repository: ghcr.io/home-operations/plex
               tag: 1.41.3.9314-a0bfb8370@sha256:38fcbef239341db591f8ff87f20777d9a783b79f757fc42e360041d7ba78eada
-
 
             env:
               #General
