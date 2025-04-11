@@ -100,7 +100,7 @@ spec:
         runAsGroup: 568
         fsGroup: 568
         fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [44, 10000]
+        supplementalGroups: [44, 1503, 10000]
         seccompProfile: { type: RuntimeDefault }
 
       # nodeSelector:
@@ -145,6 +145,6 @@ spec:
       media:
         type: nfs
         server: ${LOCAL_LAN_NAS}
-        path: /var/mnt/vol1/video
+        path: /mnt/tank/library/media
         globalMounts:
           - path: /data/media
