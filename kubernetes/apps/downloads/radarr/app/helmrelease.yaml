@@ -41,7 +41,7 @@ spec:
         initContainers:
           init-db:
             image:
-              repository: ghcr.io/onedr0p/postgres-init
+              repository: ghcr.io/home-operations/postgres-init
               tag: "17.4"
               pullPolicy: IfNotPresent
             envFrom:
@@ -51,8 +51,8 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/radarr-develop
-              tag: 5.17.0.9555@sha256:d29684557a373f6efd8ac98f0b7b3007264599d3d83160bdaef9366a3b4f5d5a
+              repository: ghcr.io/home-operations/radarr
+              tag: 5.22.1.9832@sha256:e697db98905b4b03a8112fa581bb313e6c36531cc5da96005c5d63a463ea3f2c
 
             env:
               #General

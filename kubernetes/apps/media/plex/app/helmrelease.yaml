@@ -31,16 +31,6 @@ spec:
     keepHistory: false
 
   values:
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 568
-        runAsGroup: 568
-        fsGroup: 568
-        fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [44, 10000]
-        seccompProfile: { type: RuntimeDefault }
-
     controllers:
       plex:
         replicas: 1
@@ -55,19 +45,20 @@ spec:
         containers:
           app:
             image:
-              repository: ghcr.io/onedr0p/plex
+              repository: ghcr.io/home-operations/plex
               tag: 1.41.3.9314-a0bfb8370@sha256:38fcbef239341db591f8ff87f20777d9a783b79f757fc42e360041d7ba78eada
 
 
             env:
               #General
               TZ: ${CLUSTER_TIMEZONE}
-              PLEX_ADVERTISE_URL: https://plex.devbu.io:443,http://192.168.42.128:32400
-              PLEX_NO_AUTH_NETWORKS: 192.168.10.0/24
+              PLEX_ADVERTISE_URL: https://plex.${SECRET_DOMAIN}:443,http://${CLUSTER_LB_PLEX}:32400
+              PLEX_NO_AUTH_NETWORKS: ${INETNAL_NETWORK},${INETNAL_NETWORK_2}
+              HOSTNAME: "plex"
 
             envFrom:
               - secretRef:
-                  name: sonarr-secret
+                  name: plex-secret
 
             probes:
               liveness: &probes
@@ -95,14 +86,38 @@ spec:
 
             resources:
               requests:
-                cpu: 100m
+                # gpu.intel.com/i915: 1
+                cpu: 500m
+                memory: 2Gi
+              limits:
+                # gpu.intel.com/i915: 1
+                memory: 5Gi
+
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [44, 10000]
+        seccompProfile: { type: RuntimeDefault }
+
+      # nodeSelector:
+      #   intel.feature.node.kubernetes.io/gpu: "true"
 
     service:
       main:
         controller: *app
+        type: LoadBalancer
+        annotations:
+          lbipam.cilium.io/ips: ${CLUSTER_LB_PLEX}
+          traefik.ingress.kubernetes.io/service.serversscheme: "https"
+        externalTrafficPolicy: Local
         ports:
           http:
             port: *port
+            protocol: TCP
 
     persistence:
       config:
@@ -110,26 +125,26 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /config
-      downloads:
-        type: nfs
-        server: 192.168.9.10
-        path: /var/mnt/vol1/downloads
+      config-cache:
+        existingClaim: plex-cache
         globalMounts:
-          - path: /mnt/storage/downloads
-      video:
+          - path: /config/Library/Application Support/Plex Media Server/Cache
+
+      transcode:
+        type: emptyDir
+        advancedMounts:
+          plex:
+            app:
+              - path: /transcode
+
+      logs:
+        type: emptyDir
+        globalMounts:
+          - path: /config/Library/Application Support/Plex Media Server/Logs
+
+      media:
         type: nfs
-        server: 192.168.9.10
+        server: ${LOCAL_LAN_NAS}
         path: /var/mnt/vol1/video
         globalMounts:
-          - path: /mnt/storage/video
-      scripts:
-        type: configMap
-        name: sonarr-pushover
-        defaultMode: 0775
-        globalMounts:
-          - path: /scripts/pushover-notify.sh
-            subPath: pushover-notify.sh
-            readOnly: true
-          - path: /scripts/refresh-series.sh
-            subPath: refresh-series.sh
-            readOnly: true
+          - path: /data/media
