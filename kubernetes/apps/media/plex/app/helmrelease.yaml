@@ -51,10 +51,6 @@ spec:
               PLEX_NO_AUTH_NETWORKS: ${INETNAL_NETWORK},${INETNAL_NETWORK_2}
               HOSTNAME: "plex"
 
-            envFrom:
-              - secretRef:
-                  name: plex-secret
-
             probes:
               liveness: &probes
                 enabled: true
