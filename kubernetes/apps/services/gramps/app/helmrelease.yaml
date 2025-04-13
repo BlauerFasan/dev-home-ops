@@ -1,0 +1,116 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app unifi
+
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    controllers:
+      gramps:
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image: &image
+              repository: ghcr.io/gramps-project/grampsweb
+              tag: v25.4.0@sha256:db76ed9ff530e8e18a5661f740063c88b7c3a2cf3aacc7dbfa063ed285e2f7e4
+              pullPolicy: IfNotPresent
+
+            env: &envs
+              TZ: ${CLUSTER_TIMEZONE}
+              GRAMPS_TREE: "*"
+              GRAMPS_CELERY_CONFIG__broker_url:
+              GRAMPS_CELERY_CONFIG__result_backend:
+              GRAMPS_RATELIMIT_STORAGE_URI:
+              GRAMPS_USER_DB
+
+            resources:
+              requests:
+                cpu: "10m"
+                memory: "100Mi"
+              limits:
+                memory: "2Gi"
+
+    service:
+      app:
+        controller: *app
+        type: LoadBalancer
+        annotations:
+          coredns.io/hostname: unifi
+          io.cilium/lb-ipam-ips: "${CLUSTER_LB_UNIFI}"
+          traefik.ingress.kubernetes.io/service.serversscheme: "https"
+        loadBalancerIP: "${CLUSTER_LB_UNIFI}"
+        externalTrafficPolicy: Cluster
+        ports:
+          http:
+            enabled: true
+            port: 8443
+            protocol: HTTPS
+          # -- Configure Controller port used for device command/control
+          controller:
+            enabled: true
+            port: 8080
+            protocol: TCP
+          # -- Configure Captive Portal HTTP port
+          portal-http:
+            enabled: false
+            port: 8880
+            protocol: HTTP
+          # -- Configure Captive Portal HTTPS port
+          portal-https:
+            enabled: false
+            port: 8843
+            protocol: HTTPS
+          # -- Configure Speedtest port (used for UniFi mobile speed test)
+          speedtest:
+            enabled: true
+            port: 6789
+            protocol: TCP
+          # -- Configure STUN port
+          stun:
+            enabled: true
+            port: 3478
+            protocol: UDP
+          # -- Configure remote syslog port
+          syslog:
+            enabled: true
+            port: 5514
+            protocol: UDP
+          # -- Configure device discovery port
+          discovery:
+            enabled: true
+            port: 10001
+            protocol: UDP
+
+    persistence:
+      config:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /unifi
