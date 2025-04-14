@@ -66,11 +66,11 @@ spec:
                 memory: 4Gi
 
             securityContext:
-              runAsUser: 65534
-              runAsGroup: 65534
-              fsGroup: 65534
+              runAsUser: 568
+              runAsGroup: 568
+              fsGroup: 568
               fsGroupChangePolicy: OnRootMismatch
-            #   supplementalGroups: [100, 101]
+              supplementalGroups: [100, 101]
 
               # allowPrivilegeEscalation: false
               # readOnlyRootFilesystem: true
