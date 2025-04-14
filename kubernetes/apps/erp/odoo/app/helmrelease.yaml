@@ -49,7 +49,7 @@ spec:
           app:
             image:
               repository: ghcr.io/blauerfasan/containers/odoo
-              tag: latest
+              tag: 0.0.1@sha256:ad7feed533c34197e69c3f48fd1c5156c4ff423ba9a6afb3da478871c61f3c78
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
