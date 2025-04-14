@@ -48,8 +48,8 @@ spec:
         containers:
           app:
             image:
-              repository:  odoo
-              tag: 18.0-20250401@sha256:1fbf43e95af59e36ce62047c0488bb4b343a36476cb32be634a295d551251935
+              repository: ghcr.io/blauerfasan/containers/odoo
+              tag: latest@sha256:ad7feed533c34197e69c3f48fd1c5156c4ff423ba9a6afb3da478871c61f3c78
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
@@ -65,16 +65,16 @@ spec:
               limits:
                 memory: 4Gi
 
-            # securityContext:
-            #   runAsUser: 568
-            #   runAsGroup: 568
-            #   fsGroup: 568
-            #   fsGroupChangePolicy: OnRootMismatch
+            securityContext:
+              runAsUser: 65534
+              runAsGroup: 65534
+              fsGroup: 65534
+              fsGroupChangePolicy: OnRootMismatch
             #   supplementalGroups: [100, 101]
 
-            #   allowPrivilegeEscalation: false
-            #   readOnlyRootFilesystem: true
-            #   capabilities: { drop: ["ALL"] }
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              capabilities: { drop: ["ALL"] }
 
     service:
       app:
