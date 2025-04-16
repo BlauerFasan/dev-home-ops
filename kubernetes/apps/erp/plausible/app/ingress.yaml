@@ -1,0 +1,32 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: plausible
+  annotations:
+    external-dns/is-public: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    hajimari.io/enable: "true"
+    hajimari.io/icon: mdi:poll
+    hajimari.io/description: "Plausible Analytics"
+    hajimari.io/group: server
+    hajimari.io/appName: Plausible
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
+    # traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-cloudflare-secure-noauth@kubernetescrd"
+spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+        - "analytics.${SECRET_DOMAIN_4}"
+      secretName: "analytics.${SECRET_DOMAIN_4//./-}-prod-tls"
+  rules:
+    - host: analytics.${SECRET_DOMAIN_4}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: plausible
+                port:
+                  number: 8000

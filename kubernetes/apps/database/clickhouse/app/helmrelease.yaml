@@ -1,0 +1,109 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: &app clickhouse
+
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: app-template
+      version: 3.7.3
+      interval: 30m
+      sourceRef:
+        kind: HelmRepository
+        name: bjw-s
+        namespace: flux-system
+
+  maxHistory: 5
+  install:
+    createNamespace: true
+    remediation:
+      retries: 5
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      strategy: rollback
+      retries: 5
+
+  values:
+    controllers:
+      clickhouse:
+        type: statefulset
+
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        containers:
+          app:
+            image:
+              repository: clickhouse/clickhouse-server
+              tag: 25.3.2.39-alpine@sha256:fa5532568591e844a24fdeddc705ae7b6203f00afe286ce6c1fa9f3119d45ba7
+              pullPolicy: IfNotPresent
+
+            env:
+              TZ: ${CLUSTER_TIMEZONE}
+              CLICKHOUSE_HTTP_PORT: 8123
+              CLICKHOUSE_TCP_PORT: 9000
+              CLICKHOUSE_LISTEN_HOST: 0.0.0.0
+              CLICKHOUSE_LOGGER_CONSOLE: "true"
+
+            envFrom:
+              - secretRef:
+                  name: clickhouse-secret
+
+            probes:
+              liveness: &probe
+                enabled: true
+                type: HTTP
+                path: /?query=SELECT+1
+              readiness: *probe
+              startup:
+                <<: *probe
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
+    defaultPodOptions:
+      securityContext:
+        runAsUser: 568
+        runAsGroup: 568
+        fsGroup: 568
+        fsGroupChangePolicy: OnRootMismatch
+        supplementalGroups: [44, 100, 101, 568]
+
+    service:
+      app:
+        controller: *app
+        ports:
+          http:
+            port: 8123
+
+    persistence:
+      data:
+        enabled: true
+        existingClaim: *app
+        globalMounts:
+          - path: /var/lib/clickhouse
+
+      config:
+        enabled: true
+        type: configMap
+        name: clickhouse-configmap
+        globalMounts:
+          - path: /etc/clickhouse-server/config.d/config.xml
+            subPath: config.xml
+          - path: /etc/clickhouse-server/users.d/users.xml
+            subPath: users.xml
+
+      logs:
+        enabled: true
+        type: emptyDir
+        globalMounts:
+          - path: /var/log
+
+      tmp:
+        enabled: true
+        type: emptyDir

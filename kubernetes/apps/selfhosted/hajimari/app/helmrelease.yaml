@@ -60,10 +60,6 @@ spec:
               url: 'https://pve-cluster-1.graf.homes/'
               icon: 'mdi:server'
               info: 'This is the Proxmox Cluster'
-            - name: Gitlab
-              url: 'https://gitlab.graf.homes/'
-              icon: 'mdi:gitlab'
-              info: 'This is Source Code Server'
         - group: network
           apps:
             - name: Unifi-Dreammachine
@@ -100,12 +96,23 @@ spec:
               url: 'https://hkcmanagement.de/login'
             - name: TradingView
               url: 'https://www.tradingview.com/'
+        - group: Services
+          bookmarks:
+            - name: Migadu
+              url: 'https://www.migadu.com/'
+            - name: Cloudflare
+              url: 'https://www.cloudflare.com/'
+            - name: GitHub
+              url: 'https://github.com/BlauerFasan'
+            - name: Pushovwer
+              url: 'https://www.pushover.net/'
 
       namespaceSelector:
         matchNames:
           - default
           - database
           - downloads
+          - erp
           - home
           - media
           - minio

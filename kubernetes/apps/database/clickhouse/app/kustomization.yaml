@@ -1,0 +1,15 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/kustomization.json
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ./helmrelease.yaml
+  - ./secrets.sops.yaml
+  - ../../../../templates/volsync
+configMapGenerator:
+  - name: clickhouse-configmap
+    files:
+      - ./config/config.xml
+      - ./config/users.xml
+generatorOptions:
+  disableNameSuffixHash: true
