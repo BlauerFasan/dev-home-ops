@@ -40,8 +40,8 @@ spec:
         containers:
           app: &bapp
             image:
-              repository: docker.io/monica
-              tag: 4.1.2-apache
+              repository: ghcr.io/monicahq/monica-next
+              tag:  main-fpm@sha256:cce9fd9416589f22c187788b94e5c717ac188d01645b0c2c37ad027d07c94e29
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
