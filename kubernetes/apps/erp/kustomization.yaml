@@ -7,4 +7,4 @@ resources:
   - ./namespace.yaml
   # Flux-Kustomizations
   - ./odoo/ks.yaml
-  - ./plausible/ks.yaml
+  # - ./plausible/ks.yaml
