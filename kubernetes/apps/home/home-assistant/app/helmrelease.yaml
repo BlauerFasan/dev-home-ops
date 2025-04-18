@@ -98,8 +98,10 @@ spec:
         ports:
           http:
             port: 8123
-          code-server:
-            enabled: true
+      code-server:
+        controller: *app
+        ports:
+          http:
             port: 12321
 
     persistence:

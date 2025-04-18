@@ -26,6 +26,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: home-assistant
+                name: app
                 port:
                   number: 8123
