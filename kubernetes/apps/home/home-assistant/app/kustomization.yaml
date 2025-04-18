@@ -6,5 +6,6 @@ resources:
   - ./helmrelease.yaml
   - ./ingress.yaml
   - ./ingress-code.yaml
+  - ./pvc-cache.yaml
   - ./secret.sops.yaml
   - ../../../../templates/volsync

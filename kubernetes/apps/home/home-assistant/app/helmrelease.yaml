@@ -38,14 +38,15 @@ spec:
         containers:
           app:
             image:
-              repository:  ghcr.io/onedr0p/home-assistant
-              tag: 2025.1.1@sha256:927198fc12979546cb68cf10a742255b6d5cf0f462958192182df86488ab1fe9
+              repository:  ghcr.io/home-operations/home-assistant
+              tag: 2025.4.2@sha256:a0da02d5929788d34e589f0d7e185f9263204c7406ec64fae3a792223906e511
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
               HOME_ASSISTANT_EXTERNAL_URL: https://kaseihu.${SECRET_DOMAIN}
               HOME_ASSISTANT_UNIT_SYSTEM: metric
               HASS_HTTP_TRUSTED_PROXY: 10.69.0.0/16
+              VENV_FOLDER: /venv
 
             envFrom:
               - secretRef:
@@ -104,8 +105,19 @@ spec:
     persistence:
       config:
         existingClaim: *app
-        globalMounts:
-          - path: /config
+        advancedMounts:
+          home-assistant:
+            app:
+              - path: /config
+            code-server:
+              - path: /config
+      config-cache:
+        existingClaim: home-assistant-cache-v1
+        advancedMounts:
+          home-assistant:
+            app:
+              - path: /venv
+                subPath: hass-venv
       logs:
         type: emptyDir
         globalMounts:
