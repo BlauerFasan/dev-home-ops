@@ -6,10 +6,10 @@ resources:
   - ./helmrelease.yaml
   - ./secrets.sops.yaml
   - ../../../../templates/volsync
-configMapGenerator:
-  - name: clickhouse-configmap
-    files:
-      - ./config/config.xml
-      - ./config/users.xml
+# configMapGenerator:
+#   - name: clickhouse-configmap
+#     files:
+#       - ./config/config.xml
+#       - ./config/users.xml
 generatorOptions:
   disableNameSuffixHash: true

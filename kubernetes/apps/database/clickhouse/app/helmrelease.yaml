@@ -68,6 +68,7 @@ spec:
 
     defaultPodOptions:
       securityContext:
+        runAsNonRoot: true
         runAsUser: 568
         runAsGroup: 568
         fsGroup: 568
@@ -80,6 +81,8 @@ spec:
         ports:
           http:
             port: 8123
+          tcp:
+            port: 9000
 
     persistence:
       data:
@@ -87,23 +90,20 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /var/lib/clickhouse
-
-      config:
-        enabled: true
-        type: configMap
-        name: clickhouse-configmap
-        globalMounts:
-          - path: /etc/clickhouse-server/config.d/config.xml
-            subPath: config.xml
-          - path: /etc/clickhouse-server/users.d/users.xml
-            subPath: users.xml
-
+      # config:
+      #   enabled: true
+      #   type: configMap
+      #   name: clickhouse-configmap
+      #   globalMounts:
+      #     - path: /etc/clickhouse-server/config.d/config.xml
+      #       subPath: config.xml
+      #     - path: /etc/clickhouse-server/users.d/users.xml
+      #       subPath: users.xml
       logs:
         enabled: true
         type: emptyDir
         globalMounts:
           - path: /var/log
-
       tmp:
         enabled: true
         type: emptyDir
