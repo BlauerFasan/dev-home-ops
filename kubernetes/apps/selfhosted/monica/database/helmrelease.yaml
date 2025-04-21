@@ -42,7 +42,7 @@ spec:
           cpu: 17m
           memory: 143Mi
         limits:
-          memory: 143Mi
+          memory: 256Mi
 
     initdbScripts:
       create-monica.sql: |
