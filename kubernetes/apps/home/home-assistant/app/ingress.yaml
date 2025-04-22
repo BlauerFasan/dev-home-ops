@@ -5,13 +5,13 @@ metadata:
   name: home-assistant
   annotations:
     external-dns/is-public: "false"
-    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
     hajimari.io/enable: "true"
     hajimari.io/appName: "home-assistant"
     hajimari.io/group: "home"
     hajimari.io/icon: mdi:home-assistant
     traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
-    traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-internal-default-noauth@kubernetescrd"
+    # traefik.ingress.kubernetes.io/router.middlewares: "networking-chain-internal-default-noauth@kubernetescrd"
 spec:
   ingressClassName: "traefik"
   tls:
