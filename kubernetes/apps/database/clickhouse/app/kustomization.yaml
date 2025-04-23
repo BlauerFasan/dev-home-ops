@@ -6,10 +6,15 @@ resources:
   - ./helmrelease.yaml
   - ./secrets.sops.yaml
   - ../../../../templates/volsync
-# configMapGenerator:
-#   - name: clickhouse-configmap
-#     files:
-#       - ./config/config.xml
-#       - ./config/users.xml
+configMapGenerator:
+  - name: clickhouse-logs
+    files:
+      - ./config/logs.xml
+  - name: clickhouse-ipv4-only
+    files:
+      - ./config/ipv4-only.xml
+  - name: clickhouse-low-memory
+    files:
+      - ./config/low-resources.xml
 generatorOptions:
   disableNameSuffixHash: true

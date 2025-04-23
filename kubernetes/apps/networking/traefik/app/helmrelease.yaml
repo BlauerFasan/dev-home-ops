@@ -127,6 +127,9 @@ spec:
             - main: "${SECRET_DOMAIN_3}"
               sans:
                 - "*.${SECRET_DOMAIN_3}"
+            - main: "${SECRET_DOMAIN_4}"
+              sans:
+                - "*.${SECRET_DOMAIN_4}"
 
       metrics:
         port: 8082

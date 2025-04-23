@@ -45,6 +45,7 @@ spec:
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
+              CLICKHOUSE_SKIP_USER_SETUP: 1
               CLICKHOUSE_HTTP_PORT: 8123
               CLICKHOUSE_TCP_PORT: 9000
               CLICKHOUSE_LISTEN_HOST: 0.0.0.0
@@ -90,15 +91,27 @@ spec:
         existingClaim: *app
         globalMounts:
           - path: /var/lib/clickhouse
-      # config:
-      #   enabled: true
-      #   type: configMap
-      #   name: clickhouse-configmap
-      #   globalMounts:
-      #     - path: /etc/clickhouse-server/config.d/config.xml
-      #       subPath: config.xml
-      #     - path: /etc/clickhouse-server/users.d/users.xml
-      #       subPath: users.xml
+      config-logs:
+        enabled: true
+        type: configMap
+        name: clickhouse-logs
+        globalMounts:
+          - path: /etc/clickhouse-server/config.d/logs.xml
+            subPath: logs.xml
+      config-ips:
+        enabled: true
+        type: configMap
+        name: clickhouse-ipv4-only
+        globalMounts:
+          - path: /etc/clickhouse-server/config.d/ipv4-only.xml
+            subPath: ipv4-only.xml
+      config-low:
+        enabled: true
+        type: configMap
+        name: clickhouse-low-memory
+        globalMounts:
+          - path: /etc/clickhouse-server/config.d/low-resources.xml
+            subPath: low-resources.xml
       logs:
         enabled: true
         type: emptyDir
