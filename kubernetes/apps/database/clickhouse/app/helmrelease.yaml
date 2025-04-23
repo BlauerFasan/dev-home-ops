@@ -67,14 +67,14 @@ spec:
             #       failureThreshold: 30
             #       periodSeconds: 5
 
-    defaultPodOptions:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 101
-        runAsGroup: 101
-        fsGroup: 101
-        fsGroupChangePolicy: OnRootMismatch
-        supplementalGroups: [44, 100, 101, 568]
+    # defaultPodOptions:
+    #   securityContext:
+    #     runAsNonRoot: true
+    #     runAsUser: 101
+    #     runAsGroup: 101
+    #     fsGroup: 101
+    #     fsGroupChangePolicy: OnRootMismatch
+    #     supplementalGroups: [44, 100, 101, 568]
 
     service:
       app:
