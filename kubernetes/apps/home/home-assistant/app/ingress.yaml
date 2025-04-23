@@ -26,6 +26,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                identifier: app
+                name: app
                 port:
                   number: 8123
