@@ -10,9 +10,9 @@ resources:
   # - ./gramps/ks.yaml
   # - ./mealie/ks.yaml
   # - ./invidious/ks.yaml
-  - ./it-tools/ks.yaml
+  # - ./it-tools/ks.yaml
   # - ./owncloud-is/ks.yaml
-  - ./stirling-pdf/ks.yaml
+  # - ./stirling-pdf/ks.yaml
   # - ./tika/ks.yaml
-  - ./unifi/ks.yaml
+  # - ./unifi/ks.yaml
   # - ./vikunja/ks.yaml
