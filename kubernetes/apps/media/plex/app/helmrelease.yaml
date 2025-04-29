@@ -101,10 +101,11 @@ spec:
       #   intel.feature.node.kubernetes.io/gpu: "true"
 
     service:
-      main:
+      app:
         controller: *app
         type: LoadBalancer
         annotations:
+          coredns.io/hostname: plex
           lbipam.cilium.io/ips: ${CLUSTER_LB_PLEX}
           traefik.ingress.kubernetes.io/service.serversscheme: "https"
         externalTrafficPolicy: Cluster
