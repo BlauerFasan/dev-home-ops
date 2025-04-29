@@ -1,0 +1,25 @@
+---
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: headers-plex
+  namespace: networking
+spec:
+  headers:
+    accesscontrolallowmethods: GET, OPTIONS, PUT
+    accesscontrolmaxage: 100
+    addvaryheader: true
+    sslRedirect: true
+    sslHost: "${SECRET_DOMAIN}"
+    stsSeconds: 315360000
+    stsIncludeSubdomains: true
+    stsPreload: true
+    forceSTSHeader: true
+    frameDeny: true
+    featurepolicy: camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';
+    customFrameOptionsValue: SAMEORIGIN
+    contentTypeNosniff: true
+    browserXssFilter: true
+    customRequestHeaders:
+      X-Forwarded-Proto: https
+      X-Robots-Tag: none,noarchive,nosnippet,notranslate,noimageindex
