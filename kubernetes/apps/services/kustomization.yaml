@@ -14,5 +14,5 @@ resources:
   # - ./owncloud-is/ks.yaml
   # - ./stirling-pdf/ks.yaml
   # - ./tika/ks.yaml
-  # - ./unifi/ks.yaml
+  - ./unifi/ks.yaml
   # - ./vikunja/ks.yaml
