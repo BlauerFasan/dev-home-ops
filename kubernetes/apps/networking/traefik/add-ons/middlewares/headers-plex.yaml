@@ -6,7 +6,6 @@ metadata:
   namespace: networking
 spec:
   headers:
-    accesscontrolallowmethods: GET, OPTIONS, PUT
     sslRedirect: true
     sslHost: "${SECRET_DOMAIN}"
     stsSeconds: 315360000
