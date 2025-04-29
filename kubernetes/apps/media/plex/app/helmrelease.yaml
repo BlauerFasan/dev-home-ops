@@ -107,7 +107,7 @@ spec:
         annotations:
           lbipam.cilium.io/ips: ${CLUSTER_LB_PLEX}
           traefik.ingress.kubernetes.io/service.serversscheme: "https"
-        externalTrafficPolicy: Local
+        externalTrafficPolicy: Cluster
         ports:
           http:
             port: *port
