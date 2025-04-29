@@ -14,7 +14,6 @@ spec:
     stsPreload: true
     forceSTSHeader: true
     frameDeny: true
-    featurepolicy: camera 'none'; geolocation 'none'; microphone 'none'; payment 'none'; usb 'none'; vr 'none';
     customFrameOptionsValue: SAMEORIGIN
     contentTypeNosniff: true
     browserXssFilter: true
