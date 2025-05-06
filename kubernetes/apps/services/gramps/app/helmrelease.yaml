@@ -35,82 +35,107 @@ spec:
         annotations:
           reloader.stakater.com/auto: "true"
 
+        initContainers:
+          init-db:
+            image:
+              repository: ghcr.io/home-operations/postgres-init
+              tag: "17.4"
+              pullPolicy: IfNotPresent
+            envFrom:
+              - secretRef:
+                  name: gramps-init-db
+
         containers:
           app:
             image: &image
               repository: ghcr.io/gramps-project/grampsweb
-              tag: v25.4.0@sha256:db76ed9ff530e8e18a5661f740063c88b7c3a2cf3aacc7dbfa063ed285e2f7e4
+              tag: v25.5.0@sha256:8f0d26152079208118910f2f3a1ae4f4bd3a5c3a79d4325edd6c88b37b053603
               pullPolicy: IfNotPresent
 
             env: &envs
               TZ: ${CLUSTER_TIMEZONE}
-              GRAMPS_TREE: "*"
-              GRAMPS_CELERY_CONFIG__broker_url:
-              GRAMPS_CELERY_CONFIG__result_backend:
-              GRAMPS_RATELIMIT_STORAGE_URI:
-              GRAMPS_USER_DB
+              GRAMPSWEB_TREE: "gramps"
+              GRAMPSWEB_BASE_URL: "https://heritage.${SECRET_DOMAIN}"
+              GRAMPSWEB_MEDIA_PREFIX_TREE: False
+              GRAMPSWEB_REGISTRATION_DISABLED: False
+            envFrom:
+              - secretRef:
+                  name: gramps-secret
 
             resources:
               requests:
                 cpu: "10m"
-                memory: "100Mi"
+                memory: "128Mi"
               limits:
                 memory: "2Gi"
 
+          worker:
+            image: *image
+            command:
+              [
+                "celery",
+                "-A",
+                "gramps_webapi.celery",
+                "worker",
+                "--loglevel=INFO",
+              ]
+
+            env: *envs
+            envFrom:
+              - secretRef:
+                  name: gramps-secret
+
+            resources:
+              requests:
+                cpu: 10m
+                memory: 100Mi
+              limits:
+                memory: 1024Mi
+
     service:
       app:
-        controller: *app
-        type: LoadBalancer
-        annotations:
-          coredns.io/hostname: unifi
-          io.cilium/lb-ipam-ips: "${CLUSTER_LB_UNIFI}"
-          traefik.ingress.kubernetes.io/service.serversscheme: "https"
-        loadBalancerIP: "${CLUSTER_LB_UNIFI}"
-        externalTrafficPolicy: Cluster
+        controller: gramps
         ports:
           http:
-            enabled: true
-            port: 8443
-            protocol: HTTPS
-          # -- Configure Controller port used for device command/control
-          controller:
-            enabled: true
-            port: 8080
-            protocol: TCP
-          # -- Configure Captive Portal HTTP port
-          portal-http:
-            enabled: false
-            port: 8880
-            protocol: HTTP
-          # -- Configure Captive Portal HTTPS port
-          portal-https:
-            enabled: false
-            port: 8843
-            protocol: HTTPS
-          # -- Configure Speedtest port (used for UniFi mobile speed test)
-          speedtest:
-            enabled: true
-            port: 6789
-            protocol: TCP
-          # -- Configure STUN port
-          stun:
-            enabled: true
-            port: 3478
-            protocol: UDP
-          # -- Configure remote syslog port
-          syslog:
-            enabled: true
-            port: 5514
-            protocol: UDP
-          # -- Configure device discovery port
-          discovery:
-            enabled: true
-            port: 10001
-            protocol: UDP
+            port: &port 5000
 
     persistence:
-      config:
+      data:
         enabled: true
         existingClaim: *app
+        advancedMounts:
+          gramps:
+            app:
+              - path: "/app/users"
+                subPath: "app/users"
+              - path: "/app/cache"
+                subPath: "app/cache"
+              - path: "/app/indexdir"
+                subPath: "app/indexdir"
+              - path: "/app/thumbnail_cache"
+                subPath: "app/thumbnail_cache"
+              - path: "/app/secret"
+                subPath: "app/secret"
+              - path: "/root/.gramps/grampsdb"
+                subPath: "root/.gramps/grampsdb"
+              - path: "/app/media"
+                subPath: "app/media"
+            worker:
+              - path: "/app/users"
+                subPath: "app/users"
+              - path: "/app/cache"
+                subPath: "app/cache"
+              - path: "/app/indexdir"
+                subPath: "app/indexdir"
+              - path: "/app/thumbnail_cache"
+                subPath: "app/thumbnail_cache"
+              - path: "/app/secret"
+                subPath: "app/secret"
+              - path: "/root/.gramps/grampsdb"
+                subPath: "root/.gramps/grampsdb"
+              - path: "/app/media"
+                subPath: "app/media"
+      tmpfs:
+        type: emptyDir
         globalMounts:
-          - path: /unifi
+          - path: /tmp

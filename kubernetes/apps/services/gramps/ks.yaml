@@ -10,11 +10,15 @@ spec:
   commonMetadata:
     labels:
       app.kubernetes.io/name: *app
-  path: ./kubernetes/apps/services/unifi/app
+  path: ./kubernetes/apps/services/gramps/app
   dependsOn:
+    - name: authentik
+    - name: cloudnative-pg-cluster
+    - name: dragonfly-cluster
     - name: rook-ceph-cluster
-    - name: volsync
     - name: traefik
+    - name: smtp-relay
+    - name: volsync
   sourceRef:
     kind: GitRepository
     name: home-kubernetes
