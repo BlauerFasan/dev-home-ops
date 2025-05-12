@@ -54,7 +54,7 @@ spec:
 
             env: &envs
               TZ: ${CLUSTER_TIMEZONE}
-              GRAMPSWEB_TREE: "gramps"
+              GRAMPSWEB_TREE: "d1ad59b0-77f1-4b25-95e1-4985e3be3a1c"
               GRAMPSWEB_BASE_URL: "https://heritage.${SECRET_DOMAIN}"
               GRAMPSWEB_NEW_DB_BACKEND: postgresql
               GRAMPSWEB_MEDIA_PREFIX_TREE: false
