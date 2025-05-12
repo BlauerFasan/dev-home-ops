@@ -13,7 +13,7 @@ spec:
   path: ./kubernetes/apps/services/gramps/app
   dependsOn:
     - name: authentik
-    - name: cloudnative-pg-cluster
+    # - name: cloudnative-pg-cluster
     - name: dragonfly-cluster
     - name: rook-ceph-cluster
     - name: traefik
