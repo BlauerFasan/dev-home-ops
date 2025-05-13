@@ -54,11 +54,10 @@ spec:
 
             env: &envs
               TZ: ${CLUSTER_TIMEZONE}
-              GRAMPSWEB_TREE: "*"
+              GRAMPSWEB_TREE: "gramps"
               GRAMPSWEB_BASE_URL: "https://heritage.${SECRET_DOMAIN}"
               LOG_LEVEL: DEBUG
-              GRAMPSWEB_NEW_DB_BACKEND: sharedpostgresql
-              GRAMPSWEB_MEDIA_PREFIX_TREE: true
+              GRAMPSWEB_MEDIA_PREFIX_TREE: false
               GRAMPSWEB_REGISTRATION_DISABLED: False
             envFrom:
               - secretRef:
