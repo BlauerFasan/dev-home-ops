@@ -34,7 +34,7 @@ spec:
           app:
             image:
               repository: apache/tika
-              tag: 3.1.0.0@sha256:2c1a2e563b3a9b2e98443143cd4ca34a6a1e829e24103152a299888153479fab
+              tag: 3.2.2.0@sha256:031530a4b81f37454631ce9352b07cedfd03d83c875b05677d80bff6958d11ff
 
     service:
       app:
