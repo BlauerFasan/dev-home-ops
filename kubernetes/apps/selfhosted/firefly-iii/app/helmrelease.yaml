@@ -48,7 +48,7 @@ spec:
           app:
             image:
               repository: docker.io/fireflyiii/core
-              tag: version-6.2.12
+              tag: version-6.2.21
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
