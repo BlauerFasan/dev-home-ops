@@ -49,7 +49,7 @@ spec:
           app:
             image:
               repository: docker.io/vikunja/vikunja
-              tag: 0.24.6@sha256:ed1f3ed467fecec0b57e9de7bc6607f8bbcbb23ffced6a81f5dfefc794cdbe3b
+              tag: 2.7.0@sha256:e2204a1c1c6a81e833c2b3a5442be182ca2335b54c2e7e37578cc3fe12a27cfc
 
             env:
               VIKUNJA_SERVICE_TIMEZONE: ${CLUSTER_TIMEZONE}
