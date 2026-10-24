@@ -51,7 +51,7 @@ spec:
           app:
             image:
               repository: docker.io/ghostfolio/ghostfolio
-              tag: 2.161.0@sha256:f4be7488fdaefd8270a48e3d8069510184f385044e20b5941d1226d9d96bdefe
+              tag: 3.92.0@sha256:76415358cafb7dfc6341c463efce98fc3e5a51acbba4e6848295eb770652dc5c
 
             env:
               TZ: ${CLUSTER_TIMEZONE}
